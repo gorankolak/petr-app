@@ -10,7 +10,7 @@ const MainStyle = styled.main`
 
   .main-section {
     width: 80%;
-    padding: 0 2rem 0;
+    padding: 0 0 0 2rem;
   }
 `;
 

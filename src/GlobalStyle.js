@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
 
     h1 {
       font-size: 50px;
-      line-height: 1.6;
+      line-height: 1;
       margin: 0 0 1rem;
       font-weight: 700;
       text-transform: uppercase;
