@@ -6,3 +6,4 @@ Invoicing app
 - React
 - Dexie.js
 - Styled components
+- React Table
