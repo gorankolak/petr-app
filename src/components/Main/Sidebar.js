@@ -8,7 +8,7 @@ const Sidebar = () => {
     <SidebarStyle>
       <ul className="sidebar-menu">
         <li>
-          <NavLink to="/partners" activeClassName="sidebar-selected">
+          <NavLink exact to="/" activeClassName="sidebar-selected">
             Kupci
           </NavLink>
         </li>

@@ -1,37 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import TableContainer from './PartnersStyle';
+import db from '../../db';
 
 function Partners() {
+  const [baza, setBaza] = useState([]);
+
+  useEffect(() => {
+    const getKupci = async () => {
+      const kupci = await db.kupci.toArray();
+
+      setBaza(kupci);
+      console.log(kupci);
+      return kupci;
+    };
+
+    getKupci();
+  }, []);
+
+  console.log(baza);
+
   return (
     <div>
       <h2>Kupci</h2>
-      <h3>Small title</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, tempora
-        qui nesciunt ex culpa ipsam? Quia nobis quis, sint fuga quam vel
-        reiciendis molestiae facilis ullam neque amet harum, omnis assumenda
-        esse, illum aspernatur delectus sequi qui nisi nemo? Ab quidem, quam
-        veritatis sapiente repellat aliquam sed ea illum odio molestiae
-        consequatur odit quisquam, amet laboriosam error ut sunt cumque, nisi
-        quas? Quasi vitae illo sapiente veritatis, dolorum dignissimos nam
-        officia eligendi cumque nihil, vel doloribus porro velit sequi? Dolorem
-        voluptatibus harum reprehenderit consectetur illo, culpa aut laboriosam
-      </p>
-      <p>
-        Amet consectetur adipisicing elit. Suscipit iusto fugiat veniam impedit
-        ducimus tempora, explicabo minima iste officia laborum! Perspiciatis
-        eaque totam laudantium ipsum.
-      </p>
-      <p className="secondary-font">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit iusto
-        fugiat veniam impedit ducimus tempora, explicabo minima iste officia
-        laborum! Perspiciatis eaque totam laudantium ipsum.
-      </p>
-      <p className="secondary-font">
-        Tur delectus sequi qui nisi nemo? Ab quidem, quam veritatis sapiente
-        repellat aliquam sed ea illum odio molestiae consequatur odit quisquam,
-        amet laboriosam error ut sunt cumque, nisi quas? Quasi vitae illo
-        sapiente veritatis,
-      </p>
+
+      <TableContainer>
+        <table>
+          <thead>
+            <tr>
+              {/* <th>ID</th> */}
+              <th>Naziv</th>
+              <th>Adresa</th>
+              <th>##</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* <td>001</td> */}
+            {/* <td>Prvi Kupac d.o.o.</td>
+              <td>Osječka ulica 25, Osijek</td> */}
+
+            {baza.map((item) => (
+              <tr>
+                <td>{item.naziv}</td>
+                <td>{item.adresa}</td>
+                <td>
+                  <button>Otvori</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </TableContainer>
     </div>
   );
 }

@@ -7,9 +7,14 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: ${(props) => props.theme.color.azure};
-    color: ${(props) => props.theme.color.snow};
     font-family: TitilliumWeb;
+
+    body {
+      /* background: ${(props) => props.theme.color.azure}; */
+      background: linear-gradient(to right top, ${(props) =>
+        props.theme.color.brick_red}, ${(props) => props.theme.color.azure});
+      color: ${(props) => props.theme.color.snow};
+    }
 
     h1 {
       font-size: 50px;
