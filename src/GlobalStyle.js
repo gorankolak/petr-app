@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
       /* background: ${(props) => props.theme.color.azure}; */
       background: linear-gradient(to right top, ${(props) =>
         props.theme.color.brick_red}, ${(props) => props.theme.color.azure});
+      /* background: firebrick; */
       color: ${(props) => props.theme.color.snow};
     }
 

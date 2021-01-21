@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
 import { useTable, usePagination } from 'react-table';
-import MOCK_DATA from './MOCK_DATA.json';
-import { COLUMNS } from './Columns';
+// import MOCK_DATA from './MOCK_DATA.json';
+// import { COLUMNS } from './Columns';
 
 import TableContainer from './TableStyle';
 
-export const DefaultTable = () => {
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCK_DATA, []);
+export const DefaultTable = (props) => {
+  const columns = useMemo(() => props.tableColumns, []);
+  const data = useMemo(() => props.appData, []);
 
   // const tableInstance = useTable({
   //   columns,
