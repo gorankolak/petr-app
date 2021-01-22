@@ -22,24 +22,7 @@ function createWindow() {
   win.webContents.openDevTools();
 
   ipcMain.on('print-to-pdf', function (event) {
-    // const pdfPath = path.join(__dirname, '/reports/print.pdf')
-    // const pdfPath = path.join(os.homedir(), 'Desktop', 'temp.pdf');
-    // const win = BrowserWindow.fromWebContents(event.sender);
-    // win.webContents.printToPDF(
-    //   { printBackground: true, landscape: true },
-    //   function (error, data) {
-    //     if (error) throw error;
-    //     fs.writeFile(pdfPath, data, function (error) {
-    //       if (error) {
-    //         throw error;
-    //       }
-    //       shell.openExternal('file://' + pdfPath);
-    //       event.sender.send('wrote-pdf', pdfPath);
-    //     });
-    //   }
-    // );
-
-    var options = {
+    const options = {
       marginsType: 0,
       pageSize: 'A4',
       printBackground: true,
