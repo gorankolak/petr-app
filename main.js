@@ -1,16 +1,65 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
+
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1200,
+    // width: 1200,
+    //  Main window width 1200px + DevTools width = 1683px
+    width: 1683,
     height: 800,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
+      plugins: true,
     },
   });
 
-  //   win.loadFile('index.html')
   win.loadURL('http://localhost:3000');
+
+  win.webContents.openDevTools();
+
+  ipcMain.on('print-to-pdf', function (event) {
+    // const pdfPath = path.join(__dirname, '/reports/print.pdf')
+    // const pdfPath = path.join(os.homedir(), 'Desktop', 'temp.pdf');
+    // const win = BrowserWindow.fromWebContents(event.sender);
+    // win.webContents.printToPDF(
+    //   { printBackground: true, landscape: true },
+    //   function (error, data) {
+    //     if (error) throw error;
+    //     fs.writeFile(pdfPath, data, function (error) {
+    //       if (error) {
+    //         throw error;
+    //       }
+    //       shell.openExternal('file://' + pdfPath);
+    //       event.sender.send('wrote-pdf', pdfPath);
+    //     });
+    //   }
+    // );
+
+    var options = {
+      marginsType: 0,
+      pageSize: 'A4',
+      printBackground: true,
+      printSelectionOnly: false,
+      landscape: false,
+    };
+
+    win.webContents
+      .printToPDF(options)
+      .then((data) => {
+        const pdfPath = path.join(os.homedir(), 'Desktop', 'temp.pdf');
+        fs.writeFile(pdfPath, data, (error) => {
+          if (error) throw error;
+          console.log(`Wrote PDF successfully to ${pdfPath}`);
+        });
+      })
+      .catch((error) => {
+        console.log(`Failed to write PDF to ${pdfPath}: `, error);
+      });
+  });
 }
 
 app.whenReady().then(createWindow);
