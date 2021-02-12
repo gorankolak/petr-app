@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import db from '../../../db';
+import db from '../../../services/db';
 
 import Partner from './ThePartnerStyle';
 

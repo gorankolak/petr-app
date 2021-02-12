@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { DefaultTable } from '../Table/Table';
-import { COLUMNS } from '../Table/Columns';
+import { DefaultTable } from '../../components/Table/Table';
+import { COLUMNS } from '../../components/Table/Columns';
 
 const { ipcRenderer } = window.require('electron');
 const { dialog } = window.require('electron').remote;

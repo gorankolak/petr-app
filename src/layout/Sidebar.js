@@ -9,7 +9,7 @@ const Sidebar = () => {
       <ul className="sidebar-menu">
         <li>
           <NavLink exact to="/" activeClassName="sidebar-selected">
-            Kupci
+            Partneri
           </NavLink>
         </li>
         <li>

@@ -2,12 +2,12 @@ import React from 'react';
 import { HashRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import Config from './ConfigStyle';
-import GlobalStyle from './GlobalStyle';
-import AppWrapper from './AppStyle';
+import Config from './styles/ConfigStyle';
+import GlobalStyle from './styles/GlobalStyle';
+import AppWrapper from './styles/AppStyle';
 
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
+import Header from './layout/Header';
+import Main from './layout/Main';
 
 function App() {
   return (

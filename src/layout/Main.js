@@ -4,12 +4,12 @@ import { Switch, Route } from 'react-router-dom';
 import MainStyle from './MainStyle';
 
 import Sidebar from './Sidebar.js';
-import Partners from '../Partners/Partners.js';
-import Invoices from '../Invoices/Invoices.js';
-import Articles from '../Articles/Articles';
-import DeliveryNotes from '../DeliveryNotes/DeliveryNotes.js';
-import Statistika from '../Stats/Stats.js';
-import ThePartner from '../Partners/Partner/ThePartner';
+import Partners from '../pages/Partners/Partners';
+import Invoices from '../pages/Invoices/Invoices.js';
+import Articles from '../pages/Articles/Articles';
+import DeliveryNotes from '../pages/DeliveryNotes/DeliveryNotes.js';
+import Statistika from '../pages/Stats/Stats.js';
+import ThePartner from '../pages/Partners/Partner/ThePartner';
 
 const Main = () => {
   return (

@@ -1,8 +1,8 @@
 import React from 'react';
 import Invoice from './InvoicesStyle';
-import { DefaultTable } from '../Table/Table';
-import MOCK_DATA from '../Table/MOCK_DATA.json';
-import { COLUMNS } from '../Table/Columns';
+import { DefaultTable } from '../../components/Table/Table';
+import MOCK_DATA from '../../components/Table/MOCK_DATA.json';
+import { COLUMNS } from '../../components/Table/Columns';
 
 function Invoices() {
   // const MOCK_DATA = [

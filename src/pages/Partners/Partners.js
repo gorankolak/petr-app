@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import TableContainer from './PartnersStyle';
-import db from '../../db';
+import db from '../../services/db';
 
 function Partners() {
   const [baza, setBaza] = useState([]);
@@ -22,7 +22,7 @@ function Partners() {
 
   return (
     <div>
-      <h2>Kupci</h2>
+      <h2>Partneri</h2>
 
       <TableContainer>
         <table>
