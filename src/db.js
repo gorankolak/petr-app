@@ -2,7 +2,7 @@ import Dexie from 'dexie';
 
 const db = new Dexie('myDb');
 db.version(1).stores({
-  kupci: 'naziv, adresa',
+  kupci: '++id, naziv, adresa',
 });
 
 db.version(2).stores({

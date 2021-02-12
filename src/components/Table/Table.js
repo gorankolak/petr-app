@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTable, usePagination } from 'react-table';
+
+import { useHistory } from 'react-router-dom';
 // import MOCK_DATA from './MOCK_DATA.json';
 // import { COLUMNS } from './Columns';
 
@@ -9,6 +11,16 @@ export const DefaultTable = (props) => {
   const columns = useMemo(() => props.tableColumns, []);
   const data = useMemo(() => props.appData, []);
 
+  const history = useHistory();
+
+  const handleRowClick = (row) => {
+    history.push({
+      pathname: '/partner',
+      state: {
+        test: 1,
+      },
+    });
+  };
   // const tableInstance = useTable({
   //   columns,
   //   data,
@@ -48,7 +60,7 @@ export const DefaultTable = (props) => {
           {page.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr onClick={() => handleRowClick(row)} {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
                     <td {...cell.getCellProps()}>{cell.render('Cell')}</td>

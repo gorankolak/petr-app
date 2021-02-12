@@ -9,6 +9,7 @@ import Invoices from '../Invoices/Invoices.js';
 import Articles from '../Articles/Articles';
 import DeliveryNotes from '../DeliveryNotes/DeliveryNotes.js';
 import Statistika from '../Stats/Stats.js';
+import ThePartner from '../Partners/Partner/ThePartner';
 
 const Main = () => {
   return (
@@ -23,6 +24,7 @@ const Main = () => {
           <Route path="/articles" component={Articles} />
           <Route path="/otpremnice" component={DeliveryNotes} />
           <Route path="/statistika" component={Statistika} />
+          <Route path="/partner" component={ThePartner} />
         </Switch>
       </div>
     </MainStyle>

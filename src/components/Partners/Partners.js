@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import TableContainer from './PartnersStyle';
 import db from '../../db';
 
@@ -11,7 +13,6 @@ function Partners() {
 
       setBaza(kupci);
       console.log(kupci);
-      return kupci;
     };
 
     getKupci();
@@ -39,11 +40,21 @@ function Partners() {
               <td>Osječka ulica 25, Osijek</td> */}
 
             {baza.map((item) => (
-              <tr>
+              <tr key={item.id}>
                 <td>{item.naziv}</td>
                 <td>{item.adresa}</td>
                 <td>
-                  <button>Otvori</button>
+                  <button>
+                    {/* <Link to="/partner">Otvori</Link> */}
+                    <Link
+                      to={{
+                        pathname: '/partner',
+                        state: { id: item.id },
+                      }}
+                    >
+                      Otvori
+                    </Link>
+                  </button>
                 </td>
               </tr>
             ))}
