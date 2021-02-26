@@ -9,15 +9,20 @@ import TableContainer from './TableStyle';
 
 export const DefaultTable = (props) => {
   const columns = useMemo(() => props.tableColumns, []);
-  const data = useMemo(() => props.appData, []);
+  // not getting data when useMemo() - not working?
+  // const data = useMemo(() => props.appData, []);
+  const data = props.appData;
+
+  const pathProp = props.path;
 
   const history = useHistory();
 
   const handleRowClick = (row) => {
     history.push({
-      pathname: '/partner',
+      // pathname: '/partner',
+      pathname: `/${pathProp}`,
       state: {
-        test: 1,
+        row: row,
       },
     });
   };

@@ -13,7 +13,7 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/invoices" activeClassName="sidebar-selected">
+          <NavLink to="/invoices/" activeClassName="sidebar-selected">
             Računi
           </NavLink>
         </li>

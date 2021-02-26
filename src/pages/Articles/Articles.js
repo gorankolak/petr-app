@@ -1,80 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import db from '../../services/db';
 
-const Articles = () => {
-  const [tester, setTester] = useState([]);
-  const [tog, setTog] = useState(false);
+import { DefaultTable } from '../../components/Table/Table';
+import ArticlesStyle from './ArticlesStyle';
 
-  // db.kupci.put({ naziv: 'Prva', adresa: 'Požeška 66, Osijek' });
+const Articles = () => {
+  const [baza, setBaza] = useState([]);
 
   useEffect(() => {
     const getKupci = async () => {
       const kupci = await db.kupci.toArray();
 
-      setTester(kupci);
+      setBaza(kupci);
     };
 
     getKupci();
   }, []);
 
-  const deleter = async (id) => {
-    db.kupci.delete(id);
+  const COLUMNS = [
+    {
+      Header: 'Id',
+      accessor: 'id',
+    },
+    {
+      Header: 'Partner',
+      accessor: 'partner',
+    },
+    {
+      Header: 'Adresa',
+      accessor: 'adresa',
+    },
+  ];
 
-    const kupci = await db.kupci.toArray();
-    setTester(kupci);
-  };
-
-  const adder = async (data) => {
-    db.kupci.put(data);
-
-    const kupci = await db.kupci.toArray();
-    setTester(kupci);
-  };
-
-  const toggling = () => {
-    setTog(!tog);
-  };
-
-  const inputAdder = async (e) => {
-    const tarValue = e.target.value;
-
-    db.kupci.put({
-      naziv: tarValue,
-      adresa: `${tarValue} ulica`,
-    });
-
-    const kupci = await db.kupci.toArray();
-    setTester(kupci);
-  };
+  const path = 'article';
 
   return (
-    <div>
+    <ArticlesStyle>
       <h2>Artikli</h2>
 
-      <ul>
-        {tester.map((item) => (
-          <>
-            <li key={item.naziv}>{item.naziv}</li>
-            <li key={item.adresa}>{item.adresa}</li>
-            <li>
-              <button onClick={() => deleter(item.naziv)}>KLIK</button>
-            </li>
-          </>
-        ))}
-
-        {tog ? <li>Yeeees</li> : ''}
-        <button onClick={() => toggling()}>Toggle me</button>
-
-        <input type="text" onChange={inputAdder} />
-        <button
-          onClick={() => {
-            adder({ naziv: 'Nova 22', adresa: 'Nova adresa 007, Zagreb' });
-          }}
-        >
-          Addder
-        </button>
-      </ul>
-    </div>
+      <DefaultTable path={path} appData={baza} tableColumns={COLUMNS} />
+    </ArticlesStyle>
   );
 };
 

@@ -9,8 +9,10 @@ import Invoices from '../pages/Invoices/Invoices.js';
 import Articles from '../pages/Articles/Articles';
 import DeliveryNotes from '../pages/DeliveryNotes/DeliveryNotes.js';
 import Statistika from '../pages/Stats/Stats.js';
-import ThePartner from '../pages/Partners/Partner/ThePartner';
-
+import Partner from '../pages/Partners/Partner/Partner';
+import Invoice from '../pages/Invoices/Invoice/Invoice';
+import DeliveryNote from '../pages/DeliveryNotes/DeliveryNote/DeliveryNote';
+import Article from '../pages/Articles/Article/Article';
 const Main = () => {
   return (
     <MainStyle>
@@ -24,7 +26,10 @@ const Main = () => {
           <Route path="/articles" component={Articles} />
           <Route path="/otpremnice" component={DeliveryNotes} />
           <Route path="/statistika" component={Statistika} />
-          <Route path="/partner" component={ThePartner} />
+          <Route path="/partner" component={Partner} />
+          <Route path="/invoice" component={Invoice} />
+          <Route path="/deliverynote" component={DeliveryNote} />
+          <Route path="/article" component={Article} />
         </Switch>
       </div>
     </MainStyle>

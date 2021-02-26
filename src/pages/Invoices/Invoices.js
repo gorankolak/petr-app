@@ -1,30 +1,45 @@
-import React from 'react';
-import Invoice from './InvoicesStyle';
-import { DefaultTable } from '../../components/Table/Table';
-import MOCK_DATA from '../../components/Table/MOCK_DATA.json';
-import { COLUMNS } from '../../components/Table/Columns';
+import React, { useEffect, useState } from 'react';
+import db from '../../services/db';
 
-function Invoices() {
-  // const MOCK_DATA = [
-  //   {
-  //     id: 666,
-  //     datum: '2/9/2020',
-  //     broj_racuna: 10,
-  //     otpremnica: 32,
-  //   },
-  //   {
-  //     id: 6632326,
-  //     datum: '2/29/2020',
-  //     broj_racuna: 130,
-  //     otpremnica: 332,
-  //   },
-  // ];
+import { DefaultTable } from '../../components/Table/Table';
+import Invoice from './InvoicesStyle';
+
+const Invoices = () => {
+  const [baza, setBaza] = useState([]);
+
+  useEffect(() => {
+    const getKupci = async () => {
+      const kupci = await db.kupci.toArray();
+
+      setBaza(kupci);
+    };
+
+    getKupci();
+  }, []);
+
+  const COLUMNS = [
+    {
+      Header: 'Naziv',
+      accessor: 'naziv',
+    },
+    {
+      Header: 'Adresa',
+      accessor: 'adresa',
+    },
+    {
+      Header: 'Id',
+      accessor: 'id',
+    },
+  ];
+
+  const path = 'invoice';
+
   return (
     <Invoice>
       <h2>Računi</h2>
-      <DefaultTable appData={MOCK_DATA} tableColumns={COLUMNS} />
+      <DefaultTable path={path} appData={baza} tableColumns={COLUMNS} />
     </Invoice>
   );
-}
+};
 
 export default Invoices;
