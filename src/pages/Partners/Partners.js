@@ -4,42 +4,74 @@ import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
 import TableContainer from './PartnersStyle';
+import AddPartner from './AddPartner';
 
 const Partners = () => {
-  const [baza, setBaza] = useState([]);
+  const [partnersAll, setPartnersAll] = useState('');
 
   useEffect(() => {
-    const getKupci = async () => {
-      const kupci = await db.kupci.toArray();
+    const getPartners = async () => {
+      const partnersDb = await db.partners.toArray();
 
-      setBaza(kupci);
+      setPartnersAll(partnersDb);
     };
 
-    getKupci();
+    getPartners();
   }, []);
 
   const COLUMNS = [
     {
       Header: 'Naziv',
-      accessor: 'naziv',
+      accessor: 'name',
     },
     {
       Header: 'Adresa',
-      accessor: 'adresa',
+      accessor: 'address',
     },
     {
-      Header: 'Id',
-      accessor: 'id',
+      Header: 'Datum dodavanja',
+      accessor: 'dateAdded',
     },
   ];
 
   const path = 'partner';
 
+  let partnersData;
+
+  if (partnersAll != '') {
+    partnersData = (
+      <>
+        <DefaultTable
+          path={path}
+          appData={partnersAll}
+          tableColumns={COLUMNS}
+        />
+
+        <div>
+          <Link to="/add-partner">
+            <button>Dodaj partnera</button>
+          </Link>
+        </div>
+      </>
+    );
+  } else {
+    partnersData = (
+      <>
+        <h3>Nema dostupnih podataka</h3>
+        <div>
+          <Link to="/add-partner">
+            <button>Dodaj partnera</button>
+          </Link>
+        </div>
+      </>
+    );
+  }
+
   return (
     <div>
       <h2>Partneri</h2>
 
-      <DefaultTable path={path} appData={baza} tableColumns={COLUMNS} />
+      {partnersData}
     </div>
   );
 };

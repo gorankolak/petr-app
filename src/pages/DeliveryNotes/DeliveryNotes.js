@@ -7,16 +7,16 @@ const { ipcRenderer } = window.require('electron');
 const { dialog } = window.require('electron').remote;
 
 const DeliveryNotes = () => {
-  const [baza, setBaza] = useState([]);
+  const [dlvNotes, setDlvNotes] = useState([]);
 
   useEffect(() => {
-    const getKupci = async () => {
-      const kupci = await db.kupci.toArray();
+    const getDlvNotes = async () => {
+      const dlvNotesData = await db.dlvNotes.toArray();
 
-      setBaza(kupci);
+      setDlvNotes(dlvNotesData);
     };
 
-    getKupci();
+    getDlvNotes();
   }, []);
 
   const savePdf = () => {
@@ -24,21 +24,6 @@ const DeliveryNotes = () => {
 
     dialog.showMessageBox({ message: 'File sačuvan!' });
   };
-
-  const data = [
-    {
-      id: 666,
-      datum: '2/9/2020',
-      broj_racuna: 1034343,
-      otpremnica: 32,
-    },
-    {
-      id: 6666666,
-      datum: '2/29/2020',
-      broj_racuna: 1343430,
-      otpremnica: 3334342,
-    },
-  ];
 
   const COLUMNS = [
     {
@@ -60,8 +45,7 @@ const DeliveryNotes = () => {
   return (
     <div>
       <h2>Otpremnice</h2>
-      {/* <DefaultTable /> */}
-      <DefaultTable path={path} appData={baza} tableColumns={COLUMNS} />
+      <DefaultTable path={path} appData={dlvNotes} tableColumns={COLUMNS} />
       <button onClick={savePdf}>Sačuvaj PDF</button>
     </div>
   );

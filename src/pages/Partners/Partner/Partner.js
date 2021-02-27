@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import db from '../../../services/db';
 
 import PartnerStyle from './PartnerStyle';
 
@@ -9,31 +8,24 @@ const Partner = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    const getKupci = async () => {
-      const bazaPartnera = await db.kupci.toArray();
-      const idPartnera = props.location.state.row;
-      const idPartneraNum = Number(idPartnera.id);
+    const getPartners = async () => {
+      const partnerData = props.location.state.row.values;
 
-      const filterPartner = bazaPartnera.filter(
-        (partner) => partner.id === idPartneraNum + 1
-      );
+      console.log(partnerData);
 
-      setPartner(filterPartner);
+      setPartner(partnerData);
     };
 
-    getKupci();
+    getPartners();
   }, []);
 
   return (
     <PartnerStyle>
       <p>Ovo je partner sa id brojem:</p>
-      {partner.map((partner) => (
-        <>
-          <h2>{partner.naziv}</h2>
-          <h3>ID: {partner.id}</h3>
-          <p>{partner.adresa}</p>
-        </>
-      ))}
+
+      <h2>{partner.name}</h2>
+      <p>{partner.address}</p>
+      <p>{partner.dateAdded}</p>
 
       <div>
         <button

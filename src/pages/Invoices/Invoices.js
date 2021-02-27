@@ -1,34 +1,43 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
 import Invoice from './InvoicesStyle';
 
 const Invoices = () => {
-  const [baza, setBaza] = useState([]);
+  const [invoicesDb, setinvoicesDb] = useState([]);
 
   useEffect(() => {
-    const getKupci = async () => {
-      const kupci = await db.kupci.toArray();
+    const getInvoices = async () => {
+      const invoices = await db.invoices.toArray();
 
-      setBaza(kupci);
+      setinvoicesDb(invoices);
     };
 
-    getKupci();
+    getInvoices();
   }, []);
 
   const COLUMNS = [
     {
-      Header: 'Naziv',
-      accessor: 'naziv',
+      Header: 'Br.',
+      accessor: 'invoiceNumber',
     },
     {
-      Header: 'Adresa',
-      accessor: 'adresa',
+      Header: 'Datum izdavanja',
+      accessor: 'invoiceDate',
     },
     {
-      Header: 'Id',
-      accessor: 'id',
+      Header: 'Vrsta računa',
+      accessor: 'type',
+    },
+    {
+      Header: 'Iznos',
+      accessor: 'price',
+    },
+    {
+      Header: 'Stanje',
+      accessor: 'state',
     },
   ];
 
@@ -37,7 +46,13 @@ const Invoices = () => {
   return (
     <Invoice>
       <h2>Računi</h2>
-      <DefaultTable path={path} appData={baza} tableColumns={COLUMNS} />
+      <DefaultTable path={path} appData={invoicesDb} tableColumns={COLUMNS} />
+
+      <div>
+        <Link to="/add-invoice">
+          <button>Dodaj novi račun</button>
+        </Link>
+      </div>
     </Invoice>
   );
 };

@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
 import ArticlesStyle from './ArticlesStyle';
 
 const Articles = () => {
-  const [baza, setBaza] = useState([]);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const getKupci = async () => {
-      const kupci = await db.kupci.toArray();
+    const getArticles = async () => {
+      const articlesData = await db.articles.toArray();
 
-      setBaza(kupci);
+      setArticles(articlesData);
     };
 
-    getKupci();
+    getArticles();
   }, []);
 
   const COLUMNS = [
     {
-      Header: 'Id',
-      accessor: 'id',
+      Header: 'Naziva artikla',
+      accessor: 'name',
     },
     {
-      Header: 'Partner',
-      accessor: 'partner',
-    },
-    {
-      Header: 'Adresa',
-      accessor: 'adresa',
+      Header: 'Vrsta artikla',
+      accessor: 'type',
     },
   ];
 
@@ -38,7 +35,13 @@ const Articles = () => {
     <ArticlesStyle>
       <h2>Artikli</h2>
 
-      <DefaultTable path={path} appData={baza} tableColumns={COLUMNS} />
+      <DefaultTable path={path} appData={articles} tableColumns={COLUMNS} />
+
+      <div>
+        <Link to="/add-article">
+          <button>Dodaj novi artikl</button>
+        </Link>
+      </div>
     </ArticlesStyle>
   );
 };

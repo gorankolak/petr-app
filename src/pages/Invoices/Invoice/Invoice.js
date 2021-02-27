@@ -1,39 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import db from '../../../services/db';
+// import db from '../../../services/db';
 
 import InvoiceStyle from './InvoiceStyle';
+
+const { ipcRenderer } = window.require('electron');
+const { dialog } = window.require('electron').remote;
 
 const Invoice = (props) => {
   const [invoice, setInvoice] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
-    const getKupci = async () => {
-      const bazaPartnera = await db.kupci.toArray();
-      const idPartnera = props.location.state.row;
-      const idPartneraNum = Number(idPartnera.id);
+    const getInvoice = async () => {
+      // const bazaPartnera = await db.invoices.toArray();
+      const invoiceData = props.location.state.row.values;
 
-      const filterPartner = bazaPartnera.filter(
-        (partner) => partner.id === idPartneraNum + 1
-      );
-
-      setInvoice(filterPartner);
+      setInvoice(invoiceData);
     };
 
-    getKupci();
+    getInvoice();
   }, []);
+
+  const savePdf = () => {
+    ipcRenderer.send('print-to-pdf');
+
+    dialog.showMessageBox({ message: 'File sačuvan!' });
+  };
 
   return (
     <InvoiceStyle>
       <p>Individual invoice</p>
 
-      {invoice.map((invoice) => (
-        <>
-          <h1>{invoice.id}</h1>
-          <p>{invoice.adresa}</p>
-        </>
-      ))}
+      <>
+        <h2>Račun br. {invoice.invoiceNumber}</h2>
+        <p>Datum izdavnanja: {invoice.invoiceDate}</p>
+        <p>Iznos računa: {invoice.price}</p>
+        <p>Stanje računa: {invoice.state}</p>
+      </>
+
+      <div>
+        <button onClick={savePdf}>Sačuvaj u PDF</button>
+      </div>
 
       <div>
         <button
@@ -41,7 +49,7 @@ const Invoice = (props) => {
             history.goBack();
           }}
         >
-          Natrag na račune
+          Natrag na listu računa
         </button>
       </div>
     </InvoiceStyle>

@@ -13,6 +13,10 @@ import Partner from '../pages/Partners/Partner/Partner';
 import Invoice from '../pages/Invoices/Invoice/Invoice';
 import DeliveryNote from '../pages/DeliveryNotes/DeliveryNote/DeliveryNote';
 import Article from '../pages/Articles/Article/Article';
+import AddPartner from '../pages/Partners/AddPartner';
+import AddInvoice from '../pages/Invoices/AddInvoice';
+import AddArticle from '../pages/Articles/AddArticle';
+
 const Main = () => {
   return (
     <MainStyle>
@@ -30,6 +34,9 @@ const Main = () => {
           <Route path="/invoice" component={Invoice} />
           <Route path="/deliverynote" component={DeliveryNote} />
           <Route path="/article" component={Article} />
+          <Route path="/add-partner" component={AddPartner} />
+          <Route path="/add-invoice" component={AddInvoice} />
+          <Route path="/add-article" component={AddArticle} />
         </Switch>
       </div>
     </MainStyle>

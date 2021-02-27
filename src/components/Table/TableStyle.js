@@ -15,6 +15,10 @@ const TableContainer = styled.div`
     }
 
     tbody {
+      tr {
+        cursor: pointer;
+      }
+
       td {
         padding: 0.25rem 1rem;
         border-bottom: 1px solid #eee;
