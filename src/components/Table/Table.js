@@ -20,7 +20,7 @@ export const DefaultTable = (props) => {
   const handleRowClick = (row) => {
     history.push({
       // pathname: '/partner',
-      pathname: `/${pathProp}`,
+      pathname: `${pathProp}`,
       state: {
         row: row,
       },

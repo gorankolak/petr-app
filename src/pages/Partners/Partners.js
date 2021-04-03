@@ -8,6 +8,7 @@ import AddPartner from './AddPartner';
 
 const Partners = () => {
   const [partnersAll, setPartnersAll] = useState('');
+  const path = 'partner';
 
   useEffect(() => {
     const getPartners = async () => {
@@ -33,8 +34,6 @@ const Partners = () => {
       accessor: 'dateAdded',
     },
   ];
-
-  const path = 'partner';
 
   let partnersData;
 

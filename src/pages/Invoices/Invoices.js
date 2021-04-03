@@ -24,6 +24,10 @@ const Invoices = () => {
       accessor: 'invoiceNumber',
     },
     {
+      Header: 'Partner',
+      accessor: 'partner',
+    },
+    {
       Header: 'Datum izdavanja',
       accessor: 'invoiceDate',
     },

@@ -19,7 +19,7 @@ const db = new Dexie('myDb');
 db.version(1).stores({
   partners: '++id, name, address, dateAdded',
   invoices:
-    '++id, invoiceNumber, invoiceDate, dlvNoteNumber, deliveryDate, supplierCode, type, invoiceState, articles, price, note',
+    '++id, partner, invoiceNumber, invoiceDate, dlvNoteNumber, deliveryDate, supplierCode, type, invoiceState, articles, price, note',
   articles: '++id, name, type',
   dlvNotes: '++id, dlvNoteNumber, dlvNoteDate',
 });

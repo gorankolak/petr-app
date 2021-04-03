@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import PartnerStyle from './PartnerStyle';
 
@@ -26,6 +26,21 @@ const Partner = (props) => {
       <h2>{partner.name}</h2>
       <p>{partner.address}</p>
       <p>{partner.dateAdded}</p>
+
+      <div>
+        {/* <Link to="/add-invoice">
+          <button>Dodaj novi račun</button>
+        </Link> */}
+
+        <Link
+          to={{
+            pathname: '/add-invoice',
+            state: partner,
+          }}
+        >
+          <button>Dodaj novi račun</button>
+        </Link>
+      </div>
 
       <div>
         <button
