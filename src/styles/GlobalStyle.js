@@ -10,25 +10,46 @@ const GlobalStyle = createGlobalStyle`
     font-family: TitilliumWeb;
 
     body {
-      /* background: ${(props) => props.theme.color.azure}; */
-      background: linear-gradient(to right top, ${(props) =>
-        props.theme.color.brick_red}, ${(props) => props.theme.color.azure});
-      /* background: firebrick; */
-      color: ${(props) => props.theme.color.snow};
+      background: linear-gradient(to right top, #E0CCCF, #d5cbee);
+      /* #d5cbee */
+      /* #E0CCCF */
+      color: #272733;
+      /* #ADF7B6 */
+      /* #74D3AE */
+      /* #c5b2f2 */
     }
 
-    h1 {
-      font-size: 50px;
-      line-height: 1;
-      margin: 0 0 1rem;
-      font-weight: 700;
-      text-transform: uppercase;
+    button {
+      padding: .5em 1em;
+      color: ${(props) => props.theme.color.white};
+      background-color: ${(props) => props.theme.color.black};
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+
+      border: 2px solid ${(props) => props.theme.color.black};
+      /* text-shadow: none; */
+      box-shadow: 0 20px 30px 0 rgb(12 0 46 / 10%);
+      transition: all .2s linear;
+
+      &:disabled {
+        background-color: ${(props) => props.theme.color.black_disabled};
+        border: 2px solid ${(props) => props.theme.color.black_disabled};
+      }
+
+      &:not(:disabled):hover {
+        background-color: ${(props) => props.theme.color.white};
+        color: ${(props) => props.theme.color.black};
+        border: 2px solid ${(props) => props.theme.color.black};
+      }
     }
 
     h2 {
       font-size: 28px;
       line-height: 1.6;
-      margin: 0 0 .5rem;
+      margin: 0 0 .75rem;
       font-weight: 700;
       text-transform: uppercase;
     }

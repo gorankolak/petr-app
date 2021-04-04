@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
+import { MainFooter } from '../../components/mainFooter/mainFooter';
 import TableContainer from './PartnersStyle';
 import AddPartner from './AddPartner';
 
@@ -46,22 +47,14 @@ const Partners = () => {
           tableColumns={COLUMNS}
         />
 
-        <div>
-          <Link to="/add-partner">
-            <button>Dodaj partnera</button>
-          </Link>
-        </div>
+        <MainFooter btnText="Dodaj partnera" link="/add-partner" />
       </>
     );
   } else {
     partnersData = (
       <>
         <h3>Nema dostupnih podataka</h3>
-        <div>
-          <Link to="/add-partner">
-            <button>Dodaj partnera</button>
-          </Link>
-        </div>
+        <MainFooter btnText="Dodaj partnera" link="/add-partner" />
       </>
     );
   }

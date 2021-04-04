@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
+import { MainFooter } from '../../components/mainFooter/mainFooter';
 import Invoice from './InvoicesStyle';
 
 const Invoices = () => {
@@ -52,11 +53,7 @@ const Invoices = () => {
       <h2>Računi</h2>
       <DefaultTable path={path} appData={invoicesDb} tableColumns={COLUMNS} />
 
-      <div>
-        <Link to="/add-invoice">
-          <button>Dodaj novi račun</button>
-        </Link>
-      </div>
+      <MainFooter btnText="Napravi novi račun" link="/add-invoice" />
     </Invoice>
   );
 };

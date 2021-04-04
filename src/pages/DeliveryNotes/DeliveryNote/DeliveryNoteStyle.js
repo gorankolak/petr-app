@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const DeliveryNoteStyle = styled.div`
-  background: lightblue;
+  /* XX */
 `;
 
 export default DeliveryNoteStyle;

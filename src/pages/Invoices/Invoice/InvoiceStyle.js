@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const InvoiceStyle = styled.div`
-  background: black;
+  /* xx */
 `;
 
 export default InvoiceStyle;

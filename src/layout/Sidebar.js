@@ -7,6 +7,9 @@ const Sidebar = () => {
   const [listOrder, setListOrder] = useState(1);
   return (
     <SidebarStyle>
+      <h1>
+        Aplikacija za izdavanje <strong>računa</strong>
+      </h1>
       <ul className="sidebar-menu">
         <li>
           {/* <NavLink exact to="/" activeClassName="sidebar-selected"> */}

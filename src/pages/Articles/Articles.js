@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
+import { MainFooter } from '../../components/mainFooter/mainFooter';
 import ArticlesStyle from './ArticlesStyle';
 
 const Articles = () => {
@@ -37,11 +38,7 @@ const Articles = () => {
 
       <DefaultTable path={path} appData={articles} tableColumns={COLUMNS} />
 
-      <div>
-        <Link to="/add-article">
-          <button>Dodaj novi artikl</button>
-        </Link>
-      </div>
+      <MainFooter btnText="Dodaj novi artikl" link="/add-article" />
     </ArticlesStyle>
   );
 };
