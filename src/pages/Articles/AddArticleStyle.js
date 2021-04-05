@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const AddArticleStyle = styled.div`
-  max-width: 300px;
+  /* max-width: 300px;
 
   form {
     display: flex;
@@ -14,7 +14,7 @@ const AddArticleStyle = styled.div`
 
   input {
     margin-bottom: 1em;
-  }
+  } */
 `;
 
 export default AddArticleStyle;

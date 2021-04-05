@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import db from '../../services/db';
 
+import { MainFooter } from '../../components/mainFooter/mainFooter';
 import AddPartnerStyle from './AddPartnerStyle';
 
 const AddPartner = () => {
@@ -28,22 +29,30 @@ const AddPartner = () => {
     <AddPartnerStyle>
       <h2>Dodaj partnera</h2>
       <form onSubmit={submitPartner}>
-        <label htmlFor="name">Ime partnera</label>
-        <input
-          type="text"
-          id="name"
-          onChange={(e) => setPartnerName(e.target.value)}
-        />
-        <label htmlFor="address">Adresa partnera</label>
-        <input
-          type="text"
-          id="address"
-          onChange={(e) => setPartnerAdress(e.target.value)}
-        />
-        <button type="submit">Dodaj</button>
+        <div className="formItem">
+          <label htmlFor="name">Ime partnera</label>
+          <input
+            type="text"
+            id="name"
+            onChange={(e) => setPartnerName(e.target.value)}
+          />
+        </div>
+
+        <div className="formItem">
+          <label htmlFor="address">Adresa partnera</label>
+          <input
+            type="text"
+            id="address"
+            onChange={(e) => setPartnerAdress(e.target.value)}
+          />
+        </div>
+
+        <div className="formItem">
+          <button type="submit">Dodaj</button>
+        </div>
       </form>
 
-      <div>
+      <MainFooter>
         <button
           onClick={() => {
             history.goBack();
@@ -51,7 +60,7 @@ const AddPartner = () => {
         >
           Nazad na listu partnera
         </button>
-      </div>
+      </MainFooter>
     </AddPartnerStyle>
   );
 };

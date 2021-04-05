@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { MainFooter } from '../../../components/mainFooter/mainFooter';
 import ArticleStyle from './ArticleStyle';
 
 const Article = (props) => {
@@ -24,7 +25,7 @@ const Article = (props) => {
       <h2>Vrsta artikla:</h2>
       <p>{article.type}</p>
 
-      <div>
+      <MainFooter>
         <button
           onClick={() => {
             history.goBack();
@@ -32,7 +33,7 @@ const Article = (props) => {
         >
           Nazad na listu artikala
         </button>
-      </div>
+      </MainFooter>
     </ArticleStyle>
   );
 };

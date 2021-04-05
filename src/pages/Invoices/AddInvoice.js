@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import db from '../../services/db';
 
+import { MainFooter } from '../../components/mainFooter/mainFooter';
 import AddInvoiceStyle from './AddInvoiceStyle';
 
 const AddInvoice = () => {
@@ -61,55 +62,57 @@ const AddInvoice = () => {
     <AddInvoiceStyle>
       <h2>Novi račun</h2>
       <form onSubmit={submitInvoice}>
-        <label htmlFor="partner">Partner</label>
-        {/* <input
-          type="text"
-          id="name"
-          onChange={(e) => setPartner(e.target.value)}
-          value={
-            history.location.state != undefined
-              ? history.location.state.name
-              : ''
-          }
-        /> */}
+        <div className="formItem">
+          <label htmlFor="partner">Partner</label>
+          {history.location.state === undefined ? (
+            <select
+              value={partner}
+              onChange={(e) => setPartner(e.target.value)}
+              id="partner"
+            >
+              {partnersAll.map((partner) => (
+                <option value={partner.name}>{partner.name}</option>
+              ))}
+            </select>
+          ) : (
+            <strong>{history.location.state.name}</strong>
+          )}
+        </div>
 
-        {history.location.state === undefined ? (
-          <select
-            value={partner}
-            onChange={(e) => setPartner(e.target.value)}
-            id="partner"
-          >
-            {partnersAll.map((partner) => (
-              <option value={partner.name}>{partner.name}</option>
-            ))}
-          </select>
-        ) : (
-          <strong>{history.location.state.name}</strong>
-        )}
-
-        <label htmlFor="name">Broj računa</label>
-        <strong>{invoicesAll.length}</strong>
-        {/* <input
+        <div className="formItem">
+          <label>Broj računa</label>
+          <strong>{invoicesAll.length}</strong>
+          {/* <input
           type="text"
           id="name"
           onChange={(e) => setInvoiceNumber(e.target.value)}
         /> */}
-        <label htmlFor="address">Iznos</label>
-        <input
-          type="text"
-          id="address"
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <label htmlFor="address">Stanje</label>
-        <input
-          type="text"
-          id="address"
-          onChange={(e) => setState(e.target.value)}
-        />
-        <button type="submit">Dodaj račun</button>
+        </div>
+
+        <div className="formItem">
+          <label htmlFor="address">Iznos</label>
+          <input
+            type="text"
+            id="address"
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+
+        <div className="formItem">
+          <label htmlFor="address">Stanje</label>
+          <input
+            type="text"
+            id="address"
+            onChange={(e) => setState(e.target.value)}
+          />
+        </div>
+
+        <div className="formItem">
+          <button type="submit">Dodaj račun</button>
+        </div>
       </form>
 
-      <div>
+      <MainFooter>
         {/* <button
           onClick={() => {
             history.goBack();
@@ -126,7 +129,7 @@ const AddInvoice = () => {
         <Link to="/partners">
           <button>Lista partnera</button>
         </Link>
-      </div>
+      </MainFooter>
     </AddInvoiceStyle>
   );
 };

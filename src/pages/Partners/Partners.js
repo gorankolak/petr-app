@@ -47,14 +47,23 @@ const Partners = () => {
           tableColumns={COLUMNS}
         />
 
-        <MainFooter btnText="Dodaj partnera" link="/add-partner" />
+        <MainFooter>
+          <Link to="/add-partner">
+            <button>Dodaj partnera</button>
+          </Link>
+        </MainFooter>
       </>
     );
   } else {
     partnersData = (
       <>
         <h3>Nema dostupnih podataka</h3>
-        <MainFooter btnText="Dodaj partnera" link="/add-partner" />
+
+        <MainFooter>
+          <Link to="/add-partner">
+            <button>Dodaj partnera</button>
+          </Link>
+        </MainFooter>
       </>
     );
   }

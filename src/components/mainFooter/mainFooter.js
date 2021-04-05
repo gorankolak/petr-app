@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const MainFooterStyle = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
   text-align: right;
-  /* background: red; */
+
+  button {
+    margin-left: 1rem;
+  }
 `;
 
-export const MainFooter = (props) => {
-  return (
-    <MainFooterStyle>
-      <Link to={props.link}>
-        <button>{props.btnText}</button>
-      </Link>
-    </MainFooterStyle>
-  );
+export const MainFooter = ({ children }) => {
+  return <MainFooterStyle>{children}</MainFooterStyle>;
 };

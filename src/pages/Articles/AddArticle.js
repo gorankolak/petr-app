@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import db from '../../services/db';
 
+import { MainFooter } from '../../components/mainFooter/mainFooter';
 import AddArticleStyle from './AddArticleStyle';
 
 const AddArticle = () => {
@@ -58,30 +59,38 @@ const AddArticle = () => {
       <h2>Dodavanje novih artikala</h2>
 
       <form onSubmit={submitArticle}>
-        <label htmlFor="name">Naziv artikla</label>
-        <input
-          type="text"
-          id="name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label htmlFor="type">Vrsta artikla</label>
-        <input
-          type="text"
-          id="type"
-          onChange={(e) => setType(e.target.value)}
-        />
-        <button type="submit">Dodaj artikl</button>
+        <div className="formItem">
+          <label htmlFor="name">Naziv artikla</label>
+          <input
+            type="text"
+            id="name"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+        <div className="formItem">
+          <label htmlFor="type">Vrsta artikla</label>
+          <input
+            type="text"
+            id="type"
+            onChange={(e) => setType(e.target.value)}
+          />
+        </div>
+
+        <div className="formItem">
+          <button type="submit">Dodaj artikl</button>
+        </div>
       </form>
 
-      <div>
+      <MainFooter>
         <button
           onClick={() => {
             history.goBack();
           }}
         >
-          Nazad na listu računa
+          Nazad na listu artikala
         </button>
-      </div>
+      </MainFooter>
     </div>
   );
 };

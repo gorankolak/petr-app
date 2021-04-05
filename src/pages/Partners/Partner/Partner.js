@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
+import { MainFooter } from '../../../components/mainFooter/mainFooter';
 import PartnerStyle from './PartnerStyle';
 
 const Partner = (props) => {
@@ -27,10 +28,18 @@ const Partner = (props) => {
       <p>{partner.address}</p>
       <p>{partner.dateAdded}</p>
 
-      <div>
+      <MainFooter>
         {/* <Link to="/add-invoice">
           <button>Dodaj novi račun</button>
         </Link> */}
+
+        <button
+          onClick={() => {
+            history.goBack();
+          }}
+        >
+          Nazad na listu partnera
+        </button>
 
         <Link
           to={{
@@ -40,17 +49,7 @@ const Partner = (props) => {
         >
           <button>Dodaj novi račun</button>
         </Link>
-      </div>
-
-      <div>
-        <button
-          onClick={() => {
-            history.goBack();
-          }}
-        >
-          Nazad na listu partnera
-        </button>
-      </div>
+      </MainFooter>
     </PartnerStyle>
   );
 };

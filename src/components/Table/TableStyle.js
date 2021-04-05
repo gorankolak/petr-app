@@ -68,6 +68,7 @@ const TableContainer = styled.div`
         /* background: ${(props) => props.theme.color.dust}; */
         /* border-bottom: 2px solid ${(props) => props.theme.color.dust}; */
         text-decoration: none;
+        background: transparent !important;
       }
 
       &:disabled {

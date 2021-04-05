@@ -10,6 +10,7 @@ const MainStyle = styled.main`
   border-radius: 20px;
 
   .main-section {
+    position: relative;
     width: 80%;
     padding: 1rem 2rem;
     background: ${(props) => props.theme.color.white_dark};

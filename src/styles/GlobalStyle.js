@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
       background-color: ${(props) => props.theme.color.black};
       font-weight: bold;
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
       cursor: pointer;
 
 
@@ -44,6 +44,40 @@ const GlobalStyle = createGlobalStyle`
         color: ${(props) => props.theme.color.black};
         border: 2px solid ${(props) => props.theme.color.black};
       }
+    }
+
+    /* max-width: 300px; */
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .formItem {
+      display: flex;
+      flex-direction: column;
+      max-width: 250px;
+      margin-bottom: 1em;
+    }
+
+    label {
+      margin-bottom: 0.25em;
+      font-size: 12px;
+      font-weight: 300;
+    }
+
+    input {
+      margin-bottom: 0;
+      padding: .5em 1em;
+      border-radius: 10px;
+      border: 1px solid ${(props) => props.theme.color.black_disabled};
+    }
+
+    select  {
+      margin-bottom: 0;
+      padding: .5em;
+      border-radius: 10px;
+      border: 1px solid ${(props) => props.theme.color.black_disabled};
     }
 
     h2 {

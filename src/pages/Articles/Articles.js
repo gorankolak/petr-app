@@ -38,7 +38,11 @@ const Articles = () => {
 
       <DefaultTable path={path} appData={articles} tableColumns={COLUMNS} />
 
-      <MainFooter btnText="Dodaj novi artikl" link="/add-article" />
+      <MainFooter>
+        <Link to="/add-article">
+          <button>Dodaj novi artikl</button>
+        </Link>
+      </MainFooter>
     </ArticlesStyle>
   );
 };

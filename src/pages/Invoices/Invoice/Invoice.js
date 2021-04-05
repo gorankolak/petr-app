@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 // import db from '../../../services/db';
 
+import { MainFooter } from '../../../components/mainFooter/mainFooter';
 import InvoiceStyle from './InvoiceStyle';
 
 const { ipcRenderer } = window.require('electron');
@@ -39,11 +40,7 @@ const Invoice = (props) => {
         <p>Stanje računa: {invoice.state}</p>
       </>
 
-      <div>
-        <button onClick={savePdf}>Sačuvaj u PDF</button>
-      </div>
-
-      <div>
+      <MainFooter>
         <button
           onClick={() => {
             history.goBack();
@@ -51,7 +48,9 @@ const Invoice = (props) => {
         >
           Natrag na listu računa
         </button>
-      </div>
+
+        <button onClick={savePdf}>Sačuvaj u PDF</button>
+      </MainFooter>
     </InvoiceStyle>
   );
 };

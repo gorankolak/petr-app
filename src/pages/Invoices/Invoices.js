@@ -53,7 +53,11 @@ const Invoices = () => {
       <h2>Računi</h2>
       <DefaultTable path={path} appData={invoicesDb} tableColumns={COLUMNS} />
 
-      <MainFooter btnText="Napravi novi račun" link="/add-invoice" />
+      <MainFooter>
+        <Link to="/add-invoice">
+          <button>Napravi novi račun</button>
+        </Link>
+      </MainFooter>
     </Invoice>
   );
 };
