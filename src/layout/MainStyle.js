@@ -12,7 +12,7 @@ const MainStyle = styled.main`
   .main-section {
     position: relative;
     width: 80%;
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 6rem;
     background: ${(props) => props.theme.color.white_dark};
     /* background: ${(props) => props.theme.color.dust}; */
     box-shadow: 0 20px 30px 0 rgb(12 0 46 / 10%);

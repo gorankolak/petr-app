@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import SidebarStyle from './SidebarStyle';
 
 const Sidebar = () => {
-  const [listOrder, setListOrder] = useState(1);
+  const [listOrder, setListOrder] = useState(0);
   return (
     <SidebarStyle>
       <h1>

@@ -9,7 +9,7 @@ const MainFooterStyle = styled.div`
   text-align: right;
 
   button {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
   }
 `;
 

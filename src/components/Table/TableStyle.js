@@ -9,7 +9,6 @@ const TableContainer = styled.div`
     margin-bottom: 1.5rem;
 
     thead {
-      /* background: rgba(255, 255, 255, 0.2); */
       background: transparent;
       text-align: left;
       border-bottom: 1px solid ${(props) => props.theme.color.grey};
@@ -49,32 +48,29 @@ const TableContainer = styled.div`
   .table-nav {
     margin-top: 1rem;
 
-    /* button {
-      padding: 0.25rem 1rem;
-      cursor: pointer;
-    } */
     button {
       margin-right: 0;
+      padding: 0 1rem;
 
       background: transparent;
       color: ${(props) => props.theme.color.black};
       border: none;
-      /* border-bottom: 2px solid ${(props) => props.theme.color.black}; */
       outline: none;
       box-shadow: none;
       text-decoration: underline;
 
+      :first-child {
+        padding-right: 0;
+      }
+
       &:not(:disabled):hover {
-        /* background: ${(props) => props.theme.color.dust}; */
-        /* border-bottom: 2px solid ${(props) => props.theme.color.dust}; */
         text-decoration: none;
-        background: transparent !important;
+        background: transparent;
+        border: none;
       }
 
       &:disabled {
         color: ${(props) => props.theme.color.black_disabled};
-        /* border-bottom: 2px solid ${(props) =>
-          props.theme.color.black_disabled}; */
         cursor: initial;
       }
     }
