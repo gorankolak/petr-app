@@ -11,6 +11,7 @@ import DeliveryNotes from '../pages/DeliveryNotes/DeliveryNotes.js';
 import Statistika from '../pages/Stats/Stats.js';
 import Partner from '../pages/Partners/Partner/Partner';
 import Invoice from '../pages/Invoices/Invoice/Invoice';
+import InvoicePreview from '../pages/Invoices/InvoicePreview/InvoicePreview';
 import DeliveryNote from '../pages/DeliveryNotes/DeliveryNote/DeliveryNote';
 import Article from '../pages/Articles/Article/Article';
 import AddPartner from '../pages/Partners/AddPartner';
@@ -32,6 +33,7 @@ const Main = () => {
           <Route path="/statistika" component={Statistika} />
           <Route path="/partner" component={Partner} />
           <Route path="/invoice" component={Invoice} />
+          <Route path="/invoice-preview" component={InvoicePreview} />
           <Route path="/deliverynote" component={DeliveryNote} />
           <Route path="/article" component={Article} />
           <Route path="/add-partner" component={AddPartner} />

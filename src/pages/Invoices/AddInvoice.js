@@ -62,53 +62,120 @@ const AddInvoice = () => {
     <AddInvoiceStyle>
       <h2>Novi račun</h2>
       <form onSubmit={submitInvoice}>
-        <div className="formItem">
-          <label htmlFor="partner">Partner</label>
-          {history.location.state === undefined ? (
-            <select
-              value={partner}
-              onChange={(e) => setPartner(e.target.value)}
-              id="partner"
-            >
-              {partnersAll.map((partner) => (
-                <option value={partner.name}>{partner.name}</option>
-              ))}
-            </select>
-          ) : (
-            <strong>{history.location.state.name}</strong>
-          )}
-        </div>
-
-        <div className="formItem">
-          <label>Broj računa</label>
-          <strong>{invoicesAll.length}</strong>
-          {/* <input
+        <div className="formWrapper">
+          <div className="formColumn">
+            <div className="formItem">
+              <label>Broj računa</label>
+              <strong>{invoicesAll.length}</strong>
+              {/* <input
           type="text"
           id="name"
           onChange={(e) => setInvoiceNumber(e.target.value)}
         /> */}
+            </div>
+
+            <div className="formItem">
+              <label htmlFor="partner">Partner</label>
+              {history.location.state === undefined ? (
+                <select
+                  value={partner}
+                  onChange={(e) => setPartner(e.target.value)}
+                  id="partner"
+                >
+                  {partnersAll.map((partner) => (
+                    <option value={partner.name}>{partner.name}</option>
+                  ))}
+                </select>
+              ) : (
+                <strong>{history.location.state.name}</strong>
+              )}
+            </div>
+
+            <div className="formItem">
+              <label htmlFor="invoiceDate">Datum računa</label>
+              <input
+                type="text"
+                id="invoiceDate"
+                // onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+
+            <div className="formItem">
+              <label htmlFor="deliveryDate">Datum isporuke</label>
+              <input
+                type="text"
+                id="deliveryDate"
+                // onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+
+            <div className="formItem">
+              <label htmlFor="dlvNoteNumber">Broj otpremnice</label>
+              <input
+                type="text"
+                id="dlvNoteNumber"
+                // onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+
+            <div className="formItem">
+              <label htmlFor="invoiceType">Vrsta računa</label>
+              <input
+                type="text"
+                id="invoiceType"
+                // onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="formColumn">
+            <div className="formItem">
+              <label htmlFor="address">Iznos</label>
+              <input
+                type="text"
+                id="address"
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+
+            <div className="formItem">
+              <label htmlFor="address">Stanje</label>
+              <input
+                type="text"
+                id="address"
+                onChange={(e) => setState(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="formColumn">
+            <h3>Sadržaj računa</h3>
+            <p>
+              <span>Broj računa:</span>
+              <span>{invoicesAll.length}</span>
+            </p>
+            <p>
+              <span>Partner:</span>
+              <span>{partner}</span>
+            </p>
+            <p>
+              <span>Datum računa:</span>
+              <span>{new Date().toLocaleDateString()}</span>
+            </p>
+            <p>
+              <span>Status:</span>
+              <span>{state}</span>
+            </p>
+            <p>
+              <span>Ukupan iznos:</span>
+              <span>{price}</span>
+            </p>
+          </div>
         </div>
 
-        <div className="formItem">
-          <label htmlFor="address">Iznos</label>
-          <input
-            type="text"
-            id="address"
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
-
-        <div className="formItem">
-          <label htmlFor="address">Stanje</label>
-          <input
-            type="text"
-            id="address"
-            onChange={(e) => setState(e.target.value)}
-          />
-        </div>
-
-        <div className="formItem">
+        <div className="formItemAdd">
           <button type="submit">Dodaj račun</button>
+          <button type="submit">Pregled računa</button>
         </div>
       </form>
 

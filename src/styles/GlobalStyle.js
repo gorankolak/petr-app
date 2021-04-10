@@ -19,6 +19,11 @@ const GlobalStyle = createGlobalStyle`
       /* #c5b2f2 */
     }
 
+    .testimg {
+      width: 100%;
+      margin-top: 1em;
+    }
+
     button {
       padding: .5em 1em;
       color: ${(props) => props.theme.color.white};
@@ -30,14 +35,8 @@ const GlobalStyle = createGlobalStyle`
 
 
       border: 2px solid ${(props) => props.theme.color.black};
-      /* text-shadow: none; */
       box-shadow: 0 20px 30px 0 rgb(12 0 46 / 10%);
       transition: all .2s linear;
-
-      &:disabled {
-        background-color: ${(props) => props.theme.color.black_disabled};
-        border: 2px solid ${(props) => props.theme.color.black_disabled};
-      }
 
       &:not(:disabled):hover {
         background-color: ${(props) => props.theme.color.white};
@@ -46,18 +45,53 @@ const GlobalStyle = createGlobalStyle`
       }
     }
 
-    /* max-width: 300px; */
-
-    form {
+    .formWrapper {
       display: flex;
-      flex-direction: column;
+      width: 100%;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+    }
+
+    .formColumn {
+      width: 240px;
+
+      &:nth-child(3) {
+        padding: 1rem;
+        background-color: ${(props) => props.theme.color.dust};
+        box-shadow: 0 20px 30px 0 rgb(12 0 46 / 5%);
+        border-radius: 20px;
+
+        p {
+          margin-bottom: 0;
+        }
+
+        span {
+          font-size: 14px;
+
+          &:nth-child(1) {
+            margin-right: 0.5em;
+            font-weight: 300;
+          }
+
+          &:nth-child(2) {
+            font-weight: bold;
+          }
+        }
+      }
     }
 
     .formItem {
       display: flex;
       flex-direction: column;
-      max-width: 250px;
-      margin-bottom: 1em;
+      margin-bottom: 0.5em;
+    }
+
+    .formItemAdd {
+      text-align: right;
+
+      button {
+        margin-left: 0.5rem;
+      }
     }
 
     label {
@@ -89,9 +123,11 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h3 {
-      font-size: 21px;
+      /* font-size: 21px; */
+      font-size: 17px;
       line-height: 1.6;
       margin: 0 0 .25rem;
+      text-transform: uppercase;
     }
 
     p {

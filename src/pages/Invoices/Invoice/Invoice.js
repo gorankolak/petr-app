@@ -29,6 +29,14 @@ const Invoice = (props) => {
     dialog.showMessageBox({ message: 'File sačuvan!' });
   };
 
+  const openInvoice = () => {
+    ipcRenderer.send('open-invoice');
+  };
+
+  const printPaper = () => {
+    ipcRenderer.send('print-paper');
+  };
+
   return (
     <InvoiceStyle>
       <p>Individual invoice</p>
@@ -50,6 +58,8 @@ const Invoice = (props) => {
         </button>
 
         <button onClick={savePdf}>Sačuvaj u PDF</button>
+        <button onClick={openInvoice}>Otvori pregled računa</button>
+        <button onClick={printPaper}>Print računa</button>
       </MainFooter>
     </InvoiceStyle>
   );
