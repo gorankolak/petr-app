@@ -1,28 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import db from '../../../services/db';
 
 const { ipcRenderer } = window.require('electron');
 const { dialog } = window.require('electron').remote;
 
 const InvoicePreviewStyle = styled.div`
-  /* position: fixed; */
-  /* z-index: 100; */
-  /* width: 595px; */
-  /* height: 842px; */
-  /* top: -3rem;
-  left: -3rem; */
-  /* right: 0; */
-  /* bottom: 0; */
-  /* padding: 3rem; */
-  /* margin: auto; */
-  /* background: #fff; */
-
-  /* position: absolute; */
-  /* background: #fff; */
-
-  /* display: flex;
-  flex-direction: column; */
-
   position: fixed;
   top: 0;
   left: 0;
@@ -44,7 +27,6 @@ const InvoicePreviewStyle = styled.div`
   }
 
   .half {
-    /* flex: 1/2; */
     width: 45%;
   }
 
@@ -69,7 +51,26 @@ const InvoicePreviewStyle = styled.div`
   }
 `;
 
-const InvoicePreview = () => {
+const InvoicePreview = (props) => {
+  const [invoices, setInvoices] = useState([]);
+
+  useEffect(() => {
+    const getInvoices = async () => {
+      const invoices = await db.invoices.toArray();
+      const invoicePreview = await db.invoicePreview.toArray();
+
+      const oneInvoice = await db.invoices.get({
+        invoiceNumber: invoicePreview[0].invID,
+      });
+
+      setInvoices(oneInvoice);
+    };
+
+    getInvoices();
+  }, []);
+
+  console.log(invoices);
+
   const savePdf = () => {
     ipcRenderer.send('print-to-pdf');
 
@@ -79,6 +80,9 @@ const InvoicePreview = () => {
   return (
     <InvoicePreviewStyle>
       <h1>RAČUN br. 007</h1>
+      <h2>
+        <strong>{invoices.invoiceNumber}</strong>
+      </h2>
       {/* <table>
         <thead>
           <th>prva</th>

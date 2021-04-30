@@ -34,15 +34,15 @@ const Invoices = () => {
     },
     {
       Header: 'Vrsta računa',
-      accessor: 'type',
-    },
-    {
-      Header: 'Iznos',
-      accessor: 'price',
+      accessor: 'invoiceType',
     },
     {
       Header: 'Stanje',
-      accessor: 'state',
+      accessor: 'invoiceState',
+    },
+    {
+      Header: 'Ukupan iznos',
+      accessor: 'invoiceTotal',
     },
   ];
 

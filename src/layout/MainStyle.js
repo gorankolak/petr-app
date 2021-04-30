@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const MainStyle = styled.main`
   display: flex;
-  min-height: 88vh;
+  min-height: 90vh;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(1px);

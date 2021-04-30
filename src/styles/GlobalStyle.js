@@ -43,6 +43,13 @@ const GlobalStyle = createGlobalStyle`
         color: ${(props) => props.theme.color.black};
         border: 2px solid ${(props) => props.theme.color.black};
       }
+
+      :disabled {
+        color: ${(props) => props.theme.color.black_disabled};
+        background: ${(props) => props.theme.color.grey};
+        border: 2px solid ${(props) => props.theme.color.grey};
+        cursor: initial;
+      }
     }
 
     .formWrapper {
@@ -62,7 +69,9 @@ const GlobalStyle = createGlobalStyle`
         border-radius: 20px;
 
         p {
-          margin-bottom: 0;
+          margin-bottom: 5px;
+          line-height: 1.3;
+          /* margin-bottom: 0; */
         }
 
         span {
@@ -84,6 +93,34 @@ const GlobalStyle = createGlobalStyle`
       display: flex;
       flex-direction: column;
       margin-bottom: 0.5em;
+
+      &.radioGroupWrapper {
+        margin-bottom: 0.5em;
+      }
+
+      .half {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        input {
+          width: 50%;
+        }
+
+        button {
+          width: 40%;
+        }
+      }
+    }
+
+    .radioGroup {
+      /* width: 40%; */
+      display: flex;
+      align-items: center;
+
+      input {
+        margin: auto 0.5em 5px;
+      }
     }
 
     .formItemAdd {
@@ -100,9 +137,10 @@ const GlobalStyle = createGlobalStyle`
       font-weight: 300;
     }
 
-    input {
+    input,
+    textarea {
       margin-bottom: 0;
-      padding: .5em 1em;
+      padding: 0.5em 0.75em;
       border-radius: 10px;
       border: 1px solid ${(props) => props.theme.color.black_disabled};
     }

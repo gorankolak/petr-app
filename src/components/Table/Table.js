@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useTable, usePagination } from 'react-table';
+import db from '../../services/db';
 
 import { useHistory } from 'react-router-dom';
 // import MOCK_DATA from './MOCK_DATA.json';
@@ -12,12 +13,12 @@ export const DefaultTable = (props) => {
   // not getting data when useMemo() - not working?
   // const data = useMemo(() => props.appData, []);
   const data = props.appData;
-
   const pathProp = props.path;
-
   const history = useHistory();
 
   const handleRowClick = (row) => {
+    console.log(row.original.invoiceNumber);
+
     history.push({
       // pathname: '/partner',
       pathname: `${pathProp}`,

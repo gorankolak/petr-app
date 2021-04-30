@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-// import db from '../../../services/db';
+import { useHistory, Link } from 'react-router-dom';
+import db from '../../../services/db';
 
 import { MainFooter } from '../../../components/mainFooter/mainFooter';
 import InvoiceStyle from './InvoiceStyle';
@@ -14,8 +14,19 @@ const Invoice = (props) => {
 
   useEffect(() => {
     const getInvoice = async () => {
-      // const bazaPartnera = await db.invoices.toArray();
-      const invoiceData = props.location.state.row.values;
+      const getInvoicePreview = await db.invoicePreview.toArray();
+
+      const newLocal = props.location.state
+        ? props.location.state.row.values.invoiceNumber
+        : getInvoicePreview[0].invID;
+      const currentInvoiceNumber = newLocal;
+
+      const invoiceData = await db.invoices.get({
+        invoiceNumber: currentInvoiceNumber,
+      });
+
+      await db.invoicePreview.clear();
+      await db.invoicePreview.put({ invID: invoiceData.invoiceNumber });
 
       setInvoice(invoiceData);
     };
@@ -30,6 +41,7 @@ const Invoice = (props) => {
   };
 
   const openInvoice = () => {
+    const invNumber = invoice.invoiceNumber;
     ipcRenderer.send('open-invoice');
   };
 
@@ -43,22 +55,35 @@ const Invoice = (props) => {
 
       <>
         <h2>Račun br. {invoice.invoiceNumber}</h2>
-        <p>Datum izdavnanja: {invoice.invoiceDate}</p>
-        <p>Iznos računa: {invoice.price}</p>
-        <p>Stanje računa: {invoice.state}</p>
+        <p>
+          Datum izdavnanja: <strong>{invoice.invoiceDate}</strong>
+        </p>
+        <p>
+          Iznos računa: <strong>{invoice.invoiceTotal}</strong>
+        </p>
+        <p>
+          Stanje računa: <strong>{invoice.invoiceState}</strong>
+        </p>
       </>
 
       <MainFooter>
-        <button
+        {/* <button
           onClick={() => {
             history.goBack();
           }}
         >
           Natrag na listu računa
-        </button>
+        </button> */}
+        <Link to="/invoices">
+          <button>Lista računa</button>
+        </Link>
 
-        <button onClick={savePdf}>Sačuvaj u PDF</button>
-        <button onClick={openInvoice}>Otvori pregled računa</button>
+        <Link to="/add-invoice">
+          <button>Dodaj novi račun</button>
+        </Link>
+
+        <button onClick={savePdf}>Napravi PDF računa</button>
+        <button onClick={openInvoice}>Pregled računa</button>
         <button onClick={printPaper}>Print računa</button>
       </MainFooter>
     </InvoiceStyle>

@@ -5,7 +5,7 @@ const AppWrapper = styled.div`
   /* flex-direction: column; */
   height: 100vh;
   width: 100%;
-  padding: 3rem;
+  padding: 2.5rem;
 `;
 
 export default AppWrapper;

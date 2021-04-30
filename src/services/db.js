@@ -19,10 +19,36 @@ const db = new Dexie('myDb');
 db.version(1).stores({
   partners: '++id, name, address, dateAdded',
   invoices:
-    '++id, partner, invoiceNumber, invoiceDate, dlvNoteNumber, deliveryDate, supplierCode, type, invoiceState, articles, quantity, note',
+    '++id, partner, invoiceNumber, invoiceDate, dlvNoteNumber, orderNumber, deliveryDate, supplierCode, invoiceType, invoiceState, articles, invoiceNote, invoiceTotal',
   articles: '++id, name, type',
   dlvNotes: '++id, dlvNoteNumber, dlvNoteDate',
+  invoicePreview: 'invID',
 });
+
+// WHEN DB ERASED ///////////////////////
+// db.partners.bulkAdd([
+//   { name: 'test', address: 'exten232ds', dateAdded: '2323' },
+// ]);
+// db.invoices.bulkAdd([
+//   {
+//     partner: 'test',
+//     invoiceNumber: 'test',
+//     invoiceDate: 'test',
+//     dlvNoteNumber: 'test',
+//     orderNumber: 'test',
+//     deliveryDate: 'test',
+//     supplierCode: 'test',
+//     invoiceType: 'test',
+//     invoiceState: 'test',
+//     articles: 'test',
+//     invoiceNote: 'test',
+//     invoiceTotal: 'test',
+//   },
+// ]);
+// db.articles.bulkAdd([{ name: 'test', type: 'yes' }]);
+// db.dlvNotes.bulkAdd([{ dlvNoteNumber: 'test', dlvNoteDate: 'daa' }]);
+// db.invoicePreview.bulkAdd([{ invID: '1' }]);
+//////////////////////////////////////////
 
 db.open().catch((err) => {
   console.log(err.stack || err);

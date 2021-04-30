@@ -8,8 +8,8 @@ function createWindow() {
   const win = new BrowserWindow({
     // width: 1200,
     //  Main window width 1200px + DevTools width = 1683px
-    width: 1200,
-    // width: 1683,
+    // width: 1200,
+    width: 1683,
     height: 825,
     webPreferences: {
       nodeIntegration: true,
@@ -19,37 +19,16 @@ function createWindow() {
   });
 
   win.loadURL('http://localhost:3000');
-
-  // win.webContents.openDevTools();
-
-  // ipcMain.on('open-invoice', function (event) {
-  //   const win = new BrowserWindow({
-  //     // width: 1200,
-  //     //  Main window width 1200px + DevTools width = 1683px
-  //     width: 595,
-  //     // width: 1683,
-  //     height: 842,
-  //     title: 'Pregled računa',
-  //     webPreferences: {
-  //       nodeIntegration: true,
-  //       enableRemoteModule: true,
-  //       plugins: true,
-  //       nativeWindowOpen: true,
-  //     },
-  //   });
-
-  //   win.loadURL(`file://${__dirname}/src/pages/Invoices/Invoice/Invoice.js`);
-  // });
+  win.webContents.openDevTools();
 
   let pdfWin;
   let pdfPrint;
 
-  ipcMain.on('open-invoice', function (event) {
+  ipcMain.on('open-invoice', function (event, invNumber) {
+    console.log(invNumber);
+
     pdfWin = new BrowserWindow({
-      // width: 1200,
-      //  Main window width 1200px + DevTools width = 1683px
       width: 595,
-      // width: 1683,
       height: 842,
       webPreferences: {
         nodeIntegration: true,
@@ -62,10 +41,7 @@ function createWindow() {
   });
 
   pdfPrint = new BrowserWindow({
-    // width: 1200,
-    //  Main window width 1200px + DevTools width = 1683px
     width: 595,
-    // width: 1683,
     height: 842,
     webPreferences: {
       nodeIntegration: true,
@@ -74,10 +50,11 @@ function createWindow() {
     },
   });
 
-  pdfPrint.loadURL('http://localhost:3000/#/invoice-preview');
   pdfPrint.hide();
 
   ipcMain.on('print-to-pdf', function (event) {
+    pdfPrint.loadURL('http://localhost:3000/#/invoice-preview');
+
     const options = {
       marginsType: 0,
       pageSize: 'A4',
@@ -86,25 +63,24 @@ function createWindow() {
       landscape: false,
     };
 
-    pdfPrint.webContents
-      .printToPDF(options)
-      .then((data) => {
-        const pdfPath = path.join(os.homedir(), 'Desktop', 'temp.pdf');
-        fs.writeFile(pdfPath, data, (error) => {
-          if (error) throw error;
-          console.log(`Wrote PDF successfully to ${pdfPath}`);
+    setTimeout(() => {
+      pdfPrint.webContents
+        .printToPDF(options)
+        .then((data) => {
+          const pdfPath = path.join(os.homedir(), 'Desktop', 'temp.pdf');
+          fs.writeFile(pdfPath, data, (error) => {
+            if (error) throw error;
+            console.log(`Wrote PDF successfully to ${pdfPath}`);
+          });
+        })
+        .catch((error) => {
+          console.log(`Failed to write PDF to ${pdfPath}: `, error);
         });
-      })
-      .catch((error) => {
-        console.log(`Failed to write PDF to ${pdfPath}: `, error);
-      });
+    }, 2000);
   });
 
   let printPaper = new BrowserWindow({
-    // width: 1200,
-    //  Main window width 1200px + DevTools width = 1683px
     width: 595,
-    // width: 1683,
     height: 842,
     webPreferences: {
       nodeIntegration: true,
@@ -113,10 +89,11 @@ function createWindow() {
     },
   });
 
-  printPaper.loadURL('http://localhost:3000/#/invoice-preview');
   printPaper.hide();
 
   ipcMain.on('print-paper', function (event) {
+    printPaper.loadURL('http://localhost:3000/#/invoice-preview');
+
     const options = {
       silent: false,
       printBackground: true,
@@ -132,11 +109,19 @@ function createWindow() {
       footer: 'Footer of the Page',
     };
 
-    printPaper.webContents.print(options, (success, failureReason) => {
-      if (!success) console.log(failureReason);
+    // printPaper.webContents.print(options, (success, failureReason) => {
+    //   if (!success) console.log(failureReason);
 
-      console.log('Print Initiated');
-    });
+    //   console.log('Print Initiated');
+    // });
+
+    setTimeout(() => {
+      printPaper.webContents.print(options, (success, failureReason) => {
+        if (!success) console.log(failureReason);
+
+        console.log('Print Initiated');
+      });
+    }, 2000);
   });
 }
 
