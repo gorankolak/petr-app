@@ -124,7 +124,7 @@ const AddInvoice = () => {
             </div>
 
             <div className="formItem">
-              <label htmlFor="partner">Partner</label>
+              <label htmlFor="partner">Kupac</label>
               {history.location.state === undefined ? (
                 <select
                   value={partner}
@@ -134,7 +134,7 @@ const AddInvoice = () => {
                   {partnersAll.map((partner) => (
                     <>
                       <option value="" disabled selected hidden>
-                        Dodaj partnera
+                        Dodaj kupca
                       </option>
                       <option value={partner.name}>{partner.name}</option>
                     </>
@@ -307,7 +307,7 @@ const AddInvoice = () => {
               <span>{invoiceNumber}</span>
             </p>
             <p>
-              <span>Partner:</span>
+              <span>Kupac:</span>
               <span>{partner}</span>
             </p>
             <p>

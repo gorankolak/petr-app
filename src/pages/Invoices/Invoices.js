@@ -25,7 +25,7 @@ const Invoices = () => {
       accessor: 'invoiceNumber',
     },
     {
-      Header: 'Partner',
+      Header: 'Kupac',
       accessor: 'partner',
     },
     {

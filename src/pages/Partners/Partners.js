@@ -49,7 +49,7 @@ const Partners = () => {
 
         <MainFooter>
           <Link to="/add-partner">
-            <button>Dodaj partnera</button>
+            <button>Dodaj kupca</button>
           </Link>
         </MainFooter>
       </>
@@ -61,7 +61,7 @@ const Partners = () => {
 
         <MainFooter>
           <Link to="/add-partner">
-            <button>Dodaj partnera</button>
+            <button>Dodaj kupca</button>
           </Link>
         </MainFooter>
       </>
@@ -70,7 +70,7 @@ const Partners = () => {
 
   return (
     <div>
-      <h2>Partneri</h2>
+      <h2>Kupci</h2>
 
       {partnersData}
     </div>

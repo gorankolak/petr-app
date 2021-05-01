@@ -19,7 +19,7 @@ const Sidebar = () => {
             className={listOrder === 0 ? 'sidebar-selected' : ''}
             onClick={() => setListOrder(0)}
           >
-            Partneri
+            Kupci
           </NavLink>
         </li>
         <li>

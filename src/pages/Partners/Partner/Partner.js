@@ -22,7 +22,7 @@ const Partner = (props) => {
 
   return (
     <PartnerStyle>
-      <p>Ovo je partner sa id brojem:</p>
+      <p>Ovo je kupac sa id brojem:</p>
 
       <h2>{partner.name}</h2>
       <p>{partner.address}</p>
@@ -38,7 +38,7 @@ const Partner = (props) => {
             history.goBack();
           }}
         >
-          Nazad na listu partnera
+          Nazad na listu kupaca
         </button>
 
         <Link

@@ -27,10 +27,10 @@ const AddPartner = () => {
 
   return (
     <AddPartnerStyle>
-      <h2>Dodaj partnera</h2>
+      <h2>Dodaj kupca</h2>
       <form onSubmit={submitPartner}>
         <div className="formItem">
-          <label htmlFor="name">Ime partnera</label>
+          <label htmlFor="name">Ime kupca</label>
           <input
             type="text"
             id="name"
@@ -39,7 +39,7 @@ const AddPartner = () => {
         </div>
 
         <div className="formItem">
-          <label htmlFor="address">Adresa partnera</label>
+          <label htmlFor="address">Adresa kupca</label>
           <input
             type="text"
             id="address"
@@ -58,7 +58,7 @@ const AddPartner = () => {
             history.goBack();
           }}
         >
-          Nazad na listu partnera
+          Nazad na listu kupaca
         </button>
       </MainFooter>
     </AddPartnerStyle>

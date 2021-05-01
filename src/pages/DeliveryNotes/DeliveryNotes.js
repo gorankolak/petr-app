@@ -31,7 +31,7 @@ const DeliveryNotes = () => {
       accessor: 'id',
     },
     {
-      Header: 'Partner',
+      Header: 'Kupac',
       accessor: 'partner',
     },
     {
