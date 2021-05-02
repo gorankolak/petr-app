@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import db from '../../../services/db';
 
 import { MainFooter } from '../../../components/mainFooter/mainFooter';
+import { Button } from '../../../components/Components';
 import InvoiceStyle from './InvoiceStyle';
 
 const { ipcRenderer } = window.require('electron');
@@ -69,24 +70,24 @@ const Invoice = (props) => {
       </>
 
       <MainFooter>
-        {/* <button
+        {/* <Button
           onClick={() => {
             history.goBack();
           }}
         >
           Natrag na listu računa
-        </button> */}
+        </Button> */}
         <Link to="/invoices">
-          <button>Lista računa</button>
+          <Button>Lista računa</Button>
         </Link>
 
         <Link to="/add-invoice">
-          <button>Dodaj novi račun</button>
+          <Button>Dodaj novi račun</Button>
         </Link>
 
-        <button onClick={savePdf}>Napravi PDF računa</button>
-        <button onClick={openInvoice}>Pregled računa</button>
-        <button onClick={printPaper}>Print računa</button>
+        <Button onClick={savePdf}>Napravi PDF računa</Button>
+        <Button onClick={openInvoice}>Pregled računa</Button>
+        <Button onClick={printPaper}>Print računa</Button>
       </MainFooter>
     </InvoiceStyle>
   );

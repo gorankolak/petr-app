@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import db from '../../../services/db';
 
+import { Button } from '../../../components/Components';
 import DeliveryNoteStyle from './DeliveryNoteStyle';
 
 const DeliveryNote = (props) => {
@@ -36,13 +37,13 @@ const DeliveryNote = (props) => {
       ))}
 
       <div>
-        <button
+        <Button
           onClick={() => {
             history.goBack();
           }}
         >
           Nazad na listu otpremnica
-        </button>
+        </Button>
       </div>
     </DeliveryNoteStyle>
   );

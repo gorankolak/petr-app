@@ -4,6 +4,7 @@ import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
 import { MainFooter } from '../../components/mainFooter/mainFooter';
+import { Button } from '../../components/Components';
 import Invoice from './InvoicesStyle';
 
 const Invoices = () => {
@@ -55,7 +56,7 @@ const Invoices = () => {
 
       <MainFooter>
         <Link to="/add-invoice">
-          <button>Napravi novi račun</button>
+          <Button>Napravi novi račun</Button>
         </Link>
       </MainFooter>
     </Invoice>

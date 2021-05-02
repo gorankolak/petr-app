@@ -11,45 +11,12 @@ const GlobalStyle = createGlobalStyle`
 
     body {
       background: linear-gradient(to right top, #E0CCCF, #d5cbee);
-      /* #d5cbee */
-      /* #E0CCCF */
       color: #272733;
-      /* #ADF7B6 */
-      /* #74D3AE */
-      /* #c5b2f2 */
     }
 
     .testimg {
       width: 100%;
       margin-top: 1em;
-    }
-
-    button {
-      padding: .5em 1em;
-      color: ${(props) => props.theme.color.white};
-      background-color: ${(props) => props.theme.color.black};
-      font-weight: bold;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-
-
-      border: 2px solid ${(props) => props.theme.color.black};
-      box-shadow: 0 20px 30px 0 rgb(12 0 46 / 10%);
-      transition: all .2s linear;
-
-      &:not(:disabled):hover {
-        background-color: ${(props) => props.theme.color.white};
-        color: ${(props) => props.theme.color.black};
-        border: 2px solid ${(props) => props.theme.color.black};
-      }
-
-      :disabled {
-        color: ${(props) => props.theme.color.black_disabled};
-        background: ${(props) => props.theme.color.grey};
-        border: 2px solid ${(props) => props.theme.color.grey};
-        cursor: initial;
-      }
     }
 
     .formWrapper {
@@ -71,7 +38,6 @@ const GlobalStyle = createGlobalStyle`
         p {
           margin-bottom: 5px;
           line-height: 1.3;
-          /* margin-bottom: 0; */
         }
 
         span {
@@ -114,7 +80,6 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .radioGroup {
-      /* width: 40%; */
       display: flex;
       align-items: center;
 
@@ -161,7 +126,6 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h3 {
-      /* font-size: 21px; */
       font-size: 17px;
       line-height: 1.6;
       margin: 0 0 .25rem;

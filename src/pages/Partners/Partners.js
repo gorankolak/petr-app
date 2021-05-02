@@ -4,6 +4,7 @@ import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
 import { MainFooter } from '../../components/mainFooter/mainFooter';
+import { Button } from '../../components/Components';
 import TableContainer from './PartnersStyle';
 import AddPartner from './AddPartner';
 
@@ -49,7 +50,7 @@ const Partners = () => {
 
         <MainFooter>
           <Link to="/add-partner">
-            <button>Dodaj kupca</button>
+            <Button>Dodaj kupca</Button>
           </Link>
         </MainFooter>
       </>
@@ -61,7 +62,7 @@ const Partners = () => {
 
         <MainFooter>
           <Link to="/add-partner">
-            <button>Dodaj kupca</button>
+            <Button>Dodaj kupca</Button>
           </Link>
         </MainFooter>
       </>

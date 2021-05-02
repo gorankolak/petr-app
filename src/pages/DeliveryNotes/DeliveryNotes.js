@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
+import { Button } from '../../components/Components';
 
 const { ipcRenderer } = window.require('electron');
 const { dialog } = window.require('electron').remote;
@@ -46,7 +47,7 @@ const DeliveryNotes = () => {
     <div>
       <h2>Otpremnice</h2>
       <DefaultTable path={path} appData={dlvNotes} tableColumns={COLUMNS} />
-      <button onClick={savePdf}>Sačuvaj PDF</button>
+      {/* <Button onClick={savePdf}>Sačuvaj PDF</Button> */}
     </div>
   );
 };

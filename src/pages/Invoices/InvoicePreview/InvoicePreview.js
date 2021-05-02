@@ -132,7 +132,6 @@ const InvoicePreview = (props) => {
       <p className="testing">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, in.
       </p>
-      {/* <button onClick={savePdf}>Sačuvaj u PDF</button> */}
     </InvoicePreviewStyle>
   );
 };

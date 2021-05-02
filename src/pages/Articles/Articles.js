@@ -4,6 +4,7 @@ import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
 import { MainFooter } from '../../components/mainFooter/mainFooter';
+import { Button } from '../../components/Components';
 import ArticlesStyle from './ArticlesStyle';
 
 const Articles = () => {
@@ -40,7 +41,7 @@ const Articles = () => {
 
       <MainFooter>
         <Link to="/add-article">
-          <button>Dodaj novi artikl</button>
+          <Button>Dodaj novi artikl</Button>
         </Link>
       </MainFooter>
     </ArticlesStyle>

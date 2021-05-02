@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 import { MainFooter } from '../../../components/mainFooter/mainFooter';
+import { Button } from '../../../components/Components';
 import PartnerStyle from './PartnerStyle';
 
 const Partner = (props) => {
@@ -30,16 +31,16 @@ const Partner = (props) => {
 
       <MainFooter>
         {/* <Link to="/add-invoice">
-          <button>Dodaj novi račun</button>
+          <Button>Dodaj novi račun</Button>
         </Link> */}
 
-        <button
+        <Button
           onClick={() => {
             history.goBack();
           }}
         >
           Nazad na listu kupaca
-        </button>
+        </Button>
 
         <Link
           to={{
@@ -47,7 +48,7 @@ const Partner = (props) => {
             state: partner,
           }}
         >
-          <button>Dodaj novi račun</button>
+          <Button>Dodaj novi račun</Button>
         </Link>
       </MainFooter>
     </PartnerStyle>

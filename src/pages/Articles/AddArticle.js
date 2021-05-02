@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import db from '../../services/db';
 
 import { MainFooter } from '../../components/mainFooter/mainFooter';
+import { Button } from '../../components/Components';
 import AddArticleStyle from './AddArticleStyle';
 
 const AddArticle = () => {
@@ -78,18 +79,18 @@ const AddArticle = () => {
         </div>
 
         <div className="formItem">
-          <button type="submit">Dodaj artikl</button>
+          <Button type="submit">Dodaj artikl</Button>
         </div>
       </form>
 
       <MainFooter>
-        <button
+        <Button
           onClick={() => {
             history.goBack();
           }}
         >
           Nazad na listu artikala
-        </button>
+        </Button>
       </MainFooter>
     </div>
   );

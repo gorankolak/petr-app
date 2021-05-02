@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import db from '../../services/db';
 
 import { MainFooter } from '../../components/mainFooter/mainFooter';
+import { Button } from '../../components/Components';
 import AddPartnerStyle from './AddPartnerStyle';
 
 const AddPartner = () => {
@@ -48,18 +49,18 @@ const AddPartner = () => {
         </div>
 
         <div className="formItem">
-          <button type="submit">Dodaj</button>
+          <Button type="submit">Dodaj</Button>
         </div>
       </form>
 
       <MainFooter>
-        <button
+        <Button
           onClick={() => {
             history.goBack();
           }}
         >
           Nazad na listu kupaca
-        </button>
+        </Button>
       </MainFooter>
     </AddPartnerStyle>
   );

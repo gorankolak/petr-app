@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 // import MOCK_DATA from './MOCK_DATA.json';
 // import { COLUMNS } from './Columns';
 
+import { Button } from '../Components';
 import TableContainer from './TableStyle';
 
 export const DefaultTable = (props) => {
@@ -78,12 +79,16 @@ export const DefaultTable = (props) => {
         </tbody>
       </table>
       <div className="table-nav">
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+        <Button
+          tableBtn
+          onClick={() => previousPage()}
+          disabled={!canPreviousPage}
+        >
           Prethodno
-        </button>
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
+        </Button>
+        <Button tableBtn onClick={() => nextPage()} disabled={!canNextPage}>
           Slijedeće
-        </button>
+        </Button>
       </div>
     </TableContainer>
   );

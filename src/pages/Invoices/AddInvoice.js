@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import db from '../../services/db';
 
 import { MainFooter } from '../../components/mainFooter/mainFooter';
+import { Button } from '../../components/Components';
 import AddInvoiceStyle from './AddInvoiceStyle';
 
 const { dialog } = window.require('electron').remote;
@@ -112,14 +113,15 @@ const AddInvoice = () => {
                   onChange={(e) => setInvoiceNumber(e.target.value)}
                   value={invoiceNumber}
                 />
-                <button
+                <Button
+                  tableBtn
                   onClick={(e) => {
                     e.preventDefault();
                     setInvoiceNumber(`${invoicesAll.length + 1}-1-1`);
                   }}
                 >
                   Popuni
-                </button>
+                </Button>
               </div>
             </div>
 
@@ -155,14 +157,15 @@ const AddInvoice = () => {
                   onChange={(e) => setInvoiceDate(e.target.value)}
                   value={invoiceDate}
                 />
-                <button
+                <Button
+                  tableBtn
                   onClick={(e) => {
                     e.preventDefault();
                     setInvoiceDate(`${new Date().toLocaleDateString()}`);
                   }}
                 >
                   Popuni
-                </button>
+                </Button>
               </div>
             </div>
 
@@ -351,26 +354,26 @@ const AddInvoice = () => {
         </div>
 
         <div className="formItemAdd">
-          <button type="submit">Dodaj račun</button>
+          <Button type="submit">Dodaj račun</Button>
         </div>
       </form>
 
       <MainFooter>
-        {/* <button
+        {/* <Button
           onClick={() => {
             history.goBack();
             // history.go(0);
           }}
         >
           Nazad na listu računa
-        </button> */}
+        </Button> */}
 
         <Link to="/invoices">
-          <button>Lista računa</button>
+          <Button>Lista računa</Button>
         </Link>
 
         <Link to="/partners">
-          <button>Lista partnera</button>
+          <Button>Lista partnera</Button>
         </Link>
       </MainFooter>
     </AddInvoiceStyle>

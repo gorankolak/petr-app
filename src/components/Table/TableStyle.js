@@ -47,33 +47,6 @@ const TableContainer = styled.div`
 
   .table-nav {
     margin-top: 1rem;
-
-    button {
-      margin-right: 0;
-      padding: 0 1rem;
-
-      background: transparent;
-      color: ${(props) => props.theme.color.black};
-      border: none;
-      outline: none;
-      box-shadow: none;
-      text-decoration: underline;
-
-      :first-child {
-        padding-right: 0;
-      }
-
-      &:not(:disabled):hover {
-        text-decoration: none;
-        background: transparent;
-        border: none;
-      }
-
-      &:disabled {
-        color: ${(props) => props.theme.color.black_disabled};
-        cursor: initial;
-      }
-    }
   }
 `;
 
