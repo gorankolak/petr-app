@@ -34,8 +34,10 @@ const Invoice = (props) => {
     getInvoice();
   }, []);
 
+  const sendInvoiceInfo = `${invoice.invoiceNumber}-${invoice.partner}`;
+
   const savePdf = () => {
-    ipcRenderer.send('print-to-pdf');
+    ipcRenderer.send('print-to-pdf', sendInvoiceInfo);
 
     dialog.showMessageBox({ message: 'File sačuvan!' });
   };

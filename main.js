@@ -52,7 +52,7 @@ function createWindow() {
 
   pdfPrint.hide();
 
-  ipcMain.on('print-to-pdf', function (event) {
+  ipcMain.on('print-to-pdf', function (event, incomingInvoice) {
     pdfPrint.loadURL('http://localhost:3000/#/invoice-preview');
 
     const options = {
@@ -63,11 +63,19 @@ function createWindow() {
       landscape: false,
     };
 
+    // const yearDate = new Date().getFullYear();
+    // const monthDate = new Date().getMonth();
+    // const getDay = new Date().getDate();
+    // const random = Math.floor(Math.random() * 10000 + 1);
+
+    const invoiceName = `${incomingInvoice}.pdf`;
+
     setTimeout(() => {
       pdfPrint.webContents
         .printToPDF(options)
         .then((data) => {
-          const pdfPath = path.join(os.homedir(), 'Desktop', 'temp.pdf');
+          // const pdfPath = path.join(os.homedir(), 'Desktop', 'temp.pdf');
+          const pdfPath = path.join(os.homedir(), 'Desktop', invoiceName);
           fs.writeFile(pdfPath, data, (error) => {
             if (error) throw error;
             console.log(`Wrote PDF successfully to ${pdfPath}`);
