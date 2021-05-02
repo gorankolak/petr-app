@@ -52,6 +52,26 @@ const Invoice = (props) => {
     ipcRenderer.send('print-paper');
   };
 
+  const deleter = async (id) => {
+    const options = {
+      buttons: ['Da', 'Otkaži'],
+      message: 'Da li ste sigurni da želite obrisati račun?',
+      defaultId: 1,
+    };
+
+    dialog.showMessageBox(null, options).then((response) => {
+      console.log(response.response);
+
+      if (response.response === 0) {
+        db.invoices.delete(id);
+
+        history.push({
+          pathname: '/invoices',
+        });
+      }
+    });
+  };
+
   return (
     <InvoiceStyle>
       <p>Individual invoice</p>
@@ -88,6 +108,14 @@ const Invoice = (props) => {
         <Button onClick={savePdf}>Napravi PDF računa</Button>
         <Button onClick={openInvoice}>Pregled računa</Button>
         <Button onClick={printPaper}>Print računa</Button>
+
+        <Button
+          onClick={() => {
+            deleter(invoice.id);
+          }}
+        >
+          Obriši račun
+        </Button>
       </MainFooter>
     </InvoiceStyle>
   );
