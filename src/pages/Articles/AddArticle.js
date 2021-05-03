@@ -25,36 +25,6 @@ const AddArticle = () => {
     }
   };
 
-  // const deleter = async (id) => {
-  //   db.kupci.delete(id);
-
-  //   const kupci = await db.kupci.toArray();
-  //   setTester(kupci);
-  // };
-
-  // const adder = async (data) => {
-  //   db.kupci.put(data);
-
-  //   const kupci = await db.kupci.toArray();
-  //   setTester(kupci);
-  // };
-
-  // const toggling = () => {
-  //   setTog(!tog);
-  // };
-
-  // const inputAdder = async (e) => {
-  //   const tarValue = e.target.value;
-
-  //   db.kupci.put({
-  //     naziv: tarValue,
-  //     adresa: `${tarValue} ulica`,
-  //   });
-
-  //   const kupci = await db.kupci.toArray();
-  //   setTester(kupci);
-  // };
-
   return (
     <div>
       <h2>Dodavanje novih artikala</h2>
