@@ -16,7 +16,15 @@ const Invoice = (props) => {
 
   const [invoiceNumber, setInvoiceNumber] = useState('');
   const [invoiceDate, setInvoiceDate] = useState('');
+  const [dlvNoteNumber, setDlvNoteNumber] = useState('');
+  const [orderNumber, setOrderNumber] = useState('');
   const [invoiceState, setInvoiceState] = useState('');
+  const [articles, setArticles] = useState('');
+  const [invoiceType, setInvoiceType] = useState('');
+  const [supplierCode, setSupplierCode] = useState('');
+  const [deliveryDate, setDeliveryDate] = useState('');
+  const [invoiceNote, setInvoiceNote] = useState('');
+  const [invoiceTotal, setInvoiceTotal] = useState('');
 
   useEffect(() => {
     const getInvoice = async () => {
@@ -82,8 +90,20 @@ const Invoice = (props) => {
 
     const newInvoice = {
       invoiceNumber: invoiceNumber,
+      // partner:
+      //   history.location.state !== undefined
+      //     ? history.location.state.name
+      //     : partner,
       invoiceDate: invoiceDate,
+      dlvNoteNumber: dlvNoteNumber,
+      orderNumber: orderNumber,
+      deliveryDate: deliveryDate,
+      supplierCode: supplierCode,
+      invoiceType: invoiceType,
+      articles: articles,
+      invoiceTotal: invoiceTotal,
       invoiceState: invoiceState,
+      invoiceNote: invoiceNote,
     };
 
     await db.invoices.update(invoice.id, newInvoice);
@@ -103,87 +123,257 @@ const Invoice = (props) => {
 
   if (editInvoice === false) {
     invoiceDisplay = (
-      <>
-        <p>Sadržaj računa</p>
+      <div className="formWrapper">
+        <div className="formColumn">
+          <h2>Račun br. {invoice.invoiceNumber}</h2>
+          {/* <div className="formItem">
 
-        <h2>Račun br. {invoice.invoiceNumber}</h2>
-        <p>
-          Datum izdavnanja: <strong>{invoice.invoiceDate}</strong>
-        </p>
-        <p>
-          Stanje računa: <strong>{invoice.invoiceState}</strong>
-        </p>
-        <p>
-          Iznos računa: <strong>{invoice.invoiceTotal}</strong>
-        </p>
-      </>
+            </div> */}
+
+          <div className="formItem">
+            Datum izdavanja: <strong>{invoice.invoiceDate}</strong>
+          </div>
+
+          <div className="formItem">
+            Stanje računa: <strong>{invoice.invoiceState}</strong>
+          </div>
+
+          <div className="formItem">
+            Otpremnice br <strong>{invoice.dlvNoteNumber}</strong>
+          </div>
+
+          <div className="formItem">
+            Narudžbenica br. <strong>{invoice.orderNumber}</strong>
+          </div>
+
+          <div className="formItem">
+            Šifra dobavljača <strong>{invoice.supplierCode}</strong>
+          </div>
+        </div>
+
+        <div className="formColumn">
+          <div className="formItem">
+            Odabir artikala <strong>{invoice.articles}</strong>
+          </div>
+
+          <div className="formItem">
+            Vrsta računa <strong>{invoice.invoiceType}</strong>
+          </div>
+
+          <div className="formItem">
+            Stanje <strong>{invoice.invoiceState}</strong>
+          </div>
+
+          <div className="formItem">
+            Datum isporuke <strong>{invoice.deliveryDate}</strong>
+          </div>
+
+          <div className="formItem">
+            Napomena <strong>{invoice.invoiceNote}</strong>
+          </div>
+
+          <div className="formItem">
+            Iznos računa <strong>{invoice.deliveryDate}</strong>
+          </div>
+        </div>
+      </div>
     );
   } else {
     invoiceDisplay = (
       <form onSubmit={changeInvoice}>
-        <p>Izmjena računa</p>
+        <h2>Izmjena računa</h2>
 
-        <h2>
-          Račun br.{' '}
-          <input
-            type="text"
-            id="number"
-            placeholder={invoice.invoiceNumber}
-            onChange={(e) => setInvoiceNumber(e.target.value)}
-            value={invoiceNumber}
-          />
-        </h2>
-        <p>
-          Datum izdavanja:{' '}
-          <input
-            type="text"
-            id="date"
-            placeholder={invoice.invoiceDate}
-            onChange={(e) => setInvoiceDate(e.target.value)}
-            value={invoiceDate}
-          />
-        </p>
-        <p>
-          Stanje računa:{' '}
-          <div className="formItem radioGroupWrapper">
-            <label htmlFor="invoiceState">Stanje</label>
-            <div className="radioGroup">
+        <div className="formWrapper">
+          <div className="formColumn">
+            <div className="formItem">
+              Račun br.{' '}
               <input
-                type="radio"
-                name="invoiceState"
-                id="invoiceState"
-                onChange={(e) => setInvoiceState('Plaćeno')}
-                value={invoiceState}
+                type="text"
+                id="number"
+                placeholder={invoice.invoiceNumber}
+                onChange={(e) => setInvoiceNumber(e.target.value)}
+                value={invoiceNumber}
               />
-              <label htmlFor="invoiceType">Plaćeno</label>
             </div>
-            <div className="radioGroup">
+            <div className="formItem">
+              Datum izdavanja{' '}
               <input
-                type="radio"
-                name="invoiceState"
-                id="invoiceState"
-                onChange={(e) => setInvoiceState('Neplaćeno')}
+                type="text"
+                id="date"
+                placeholder={invoice.invoiceDate}
+                onChange={(e) => setInvoiceDate(e.target.value)}
+                value={invoiceDate}
               />
-              <label htmlFor="invoiceType">Neplaćeno</label>
+            </div>
+            <div className="formItem">
+              <label htmlFor="dlvNoteNumber">Otpremnice br.</label>
+              <input
+                type="text"
+                id="dlvNoteNumber"
+                placeholder={invoice.dlvNoteNumber}
+                onChange={(e) => setDlvNoteNumber(e.target.value)}
+                value={dlvNoteNumber}
+              />
+            </div>
+
+            <div className="formItem">
+              <label htmlFor="orderNumber">Narudžbenica br.</label>
+              <input
+                type="text"
+                id="orderNumber"
+                placeholder={invoice.orderNumber}
+                onChange={(e) => setOrderNumber(e.target.value)}
+                value={orderNumber}
+              />
+            </div>
+
+            <div className="formItem">
+              <label htmlFor="supplierCode">Šifra dobavljača</label>
+              <input
+                type="text"
+                id="supplierCode"
+                placeholder={invoice.supplierCode}
+                onChange={(e) => setSupplierCode(e.target.value)}
+                value={supplierCode}
+              />
             </div>
           </div>
-        </p>
-        <p>
-          Iznos računa: <strong>{invoice.invoiceTotal}</strong>
-        </p>
-        <div>
-          <Button
-            onClick={() => {
-              setEditInvoice(false);
-              setInvoiceNumber('');
-              setInvoiceDate('');
-              setInvoiceState('');
-            }}
-          >
-            Otkaži izmjenu
-          </Button>
 
-          <Button type="submit">Spremi izmjene</Button>
+          <div className="formColumn">
+            <div className="formItem">
+              <label htmlFor="articles">Odabir artikala</label>
+              <input
+                type="text"
+                id="articles"
+                placeholder={invoice.articles}
+                onChange={(e) => {
+                  setArticles(e.target.value);
+                  // change later
+                  setInvoiceTotal('125,00kn');
+                }}
+                value={articles}
+              />
+
+              {/* omogućiti izbor više artikala + količina za svakog */}
+            </div>
+            <div className="formItem radioGroupWrapper">
+              <label htmlFor="invoiceType">Vrsta računa</label>
+              <div className="radioGroup">
+                <input
+                  type="radio"
+                  name="type"
+                  id="invoiceType"
+                  onChange={(e) => setInvoiceType('Račun')}
+                />
+                <label htmlFor="invoiceType">Račun</label>
+              </div>
+              <div className="radioGroup">
+                <input
+                  type="radio"
+                  name="type"
+                  id="invoiceType"
+                  onChange={(e) =>
+                    setInvoiceType('Obavijest o knjiženju na teret')
+                  }
+                />
+                <label htmlFor="invoiceType">
+                  Obavijest o knjiženju na teret
+                </label>
+              </div>
+              <div className="radioGroup">
+                <input
+                  type="radio"
+                  name="type"
+                  id="invoiceType"
+                  onChange={(e) =>
+                    setInvoiceType('Obavijest o knjiženju u korist')
+                  }
+                />
+                <label htmlFor="invoiceType">
+                  Obavijest o knjiženju u korist
+                </label>
+              </div>
+            </div>
+
+            <div className="formItem">
+              <label htmlFor="deliveryDate">Datum isporuke</label>
+              <input
+                type="text"
+                id="deliveryDate"
+                placeholder={invoice.invoiceDate}
+                onChange={(e) => setDeliveryDate(e.target.value)}
+                value={invoiceDate}
+              />
+            </div>
+
+            <div className="formItem">
+              <label htmlFor="invoiceNote">Napomena</label>
+              <textarea
+                name="invoiceNote"
+                id="invoiceNote"
+                cols="30"
+                rows="4"
+                placeholder={invoice.invoiceNumber}
+                onChange={(e) => setInvoiceNote(e.target.value)}
+                value={invoiceNote}
+              ></textarea>
+            </div>
+          </div>
+
+          <div className="formColumn">
+            <div className="formItem">
+              <p>Stanje računa</p>
+              <div className="formItem radioGroupWrapper">
+                {/* <label htmlFor="invoiceState">Stanje</label> */}
+                <div className="radioGroup">
+                  <input
+                    type="radio"
+                    name="invoiceState"
+                    id="invoiceState"
+                    onChange={(e) => setInvoiceState('Plaćeno')}
+                    value={invoiceState}
+                  />
+                  <label htmlFor="invoiceType">Plaćeno</label>
+                </div>
+                <div className="radioGroup">
+                  <input
+                    type="radio"
+                    name="invoiceState"
+                    id="invoiceState"
+                    onChange={(e) => setInvoiceState('Neplaćeno')}
+                  />
+                  <label htmlFor="invoiceType">Neplaćeno</label>
+                </div>
+              </div>
+            </div>
+
+            <div className="formItem">
+              Iznos računa: <strong>{invoice.invoiceTotal}</strong>
+            </div>
+
+            <div>
+              <Button
+                onClick={() => {
+                  setEditInvoice(false);
+                  setInvoiceNumber('');
+                  setInvoiceDate('');
+                  setInvoiceState('');
+                  setDlvNoteNumber('');
+                  setOrderNumber('');
+                  setArticles('');
+                  setInvoiceType('');
+                  setSupplierCode('');
+                  setDeliveryDate('');
+                  setInvoiceNote('');
+                  setInvoiceTotal('');
+                }}
+              >
+                Otkaži izmjenu
+              </Button>
+
+              <Button type="submit">Spremi izmjene</Button>
+            </div>
+          </div>
         </div>
       </form>
     );
@@ -204,6 +394,14 @@ const Invoice = (props) => {
             setInvoiceNumber(invoice.invoiceNumber);
             setInvoiceDate(invoice.invoiceDate);
             setInvoiceState(invoice.invoiceState);
+            setDlvNoteNumber(invoice.dlvNoteNumber);
+            setOrderNumber(invoice.orderNumber);
+            setArticles(invoice.articles);
+            setInvoiceType(invoice.invoiceType);
+            setSupplierCode(invoice.supplierCode);
+            setDeliveryDate(invoice.deliveryDate);
+            setInvoiceNote(invoice.invoiceNote);
+            setInvoiceTotal(invoice.invoiceTotal);
           }}
         >
           Izmijeni račun
