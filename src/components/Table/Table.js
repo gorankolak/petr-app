@@ -1,5 +1,10 @@
 import React, { useMemo, useEffect } from 'react';
-import { useTable, usePagination } from 'react-table';
+import {
+  useTable,
+  usePagination,
+  useSortBy,
+  useGlobalFilter,
+} from 'react-table';
 import db from '../../services/db';
 
 import { useHistory } from 'react-router-dom';
@@ -43,22 +48,37 @@ export const DefaultTable = (props) => {
     canNextPage,
     canPreviousPage,
     prepareRow,
+    state,
+    setGlobalFilter,
   } = useTable(
     {
       columns,
       data,
     },
+    useGlobalFilter,
+    useSortBy,
     usePagination
   );
 
+  const { globalFilter } = state;
+
   return (
     <TableContainer>
+      <span>
+        Pretraga:{' '}
+        <input
+          value={globalFilter || ''}
+          onChange={(e) => setGlobalFilter(e.target.value)}
+        />
+      </span>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                </th>
               ))}
             </tr>
           ))}

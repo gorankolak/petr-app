@@ -8,8 +8,8 @@ function createWindow() {
   const win = new BrowserWindow({
     // width: 1200,
     //  Main window width 1200px + DevTools width = 1683px
-    // width: 1200,
-    width: 1683,
+    width: 1200,
+    // width: 1683,
     height: 825,
     webPreferences: {
       nodeIntegration: true,
@@ -19,7 +19,7 @@ function createWindow() {
   });
 
   win.loadURL('http://localhost:3000');
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   let pdfWin;
   let pdfPrint;
