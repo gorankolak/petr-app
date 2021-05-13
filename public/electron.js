@@ -1,15 +1,18 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const isDev = require('electron-is-dev');
 
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
+// Handle creating/removing shortcuts on Windows when installing/uninstalling
+if (require('electron-squirrel-startup')) {
+  app.quit();
+}
+
 function createWindow() {
   const win = new BrowserWindow({
-    // width: 1200,
-    //  Main window width 1200px + DevTools width = 1683px
-    width: 1200,
-    // width: 1683,
+    width: 1250,
     height: 825,
     webPreferences: {
       nodeIntegration: true,
@@ -18,8 +21,19 @@ function createWindow() {
     },
   });
 
-  win.loadURL('http://localhost:3000');
-  // win.webContents.openDevTools();
+  // win.loadURL('http://localhost:3000');
+
+  win.loadURL(
+    isDev
+      ? 'http://localhost:3000'
+      : `file://${path.join(__dirname, '../build/index.html')}`
+  );
+
+  // win.webContents.openDevTools({ mode: 'detach' });
+
+  if (isDev) {
+    win.webContents.openDevTools({ mode: 'detach' });
+  }
 
   let pdfWin;
   let pdfPrint;
@@ -37,7 +51,15 @@ function createWindow() {
       },
     });
 
-    pdfWin.loadURL('http://localhost:3000/#/invoice-preview');
+    // pdfWin.loadURL('http://localhost:3000/#/invoice-preview');
+    pdfWin.loadURL(
+      isDev
+        ? 'http://localhost:3000/#/invoice-preview'
+        : `file://${path.join(
+            __dirname,
+            '../build/index.html#/invoice-preview'
+          )}`
+    );
   });
 
   pdfPrint = new BrowserWindow({
@@ -53,7 +75,15 @@ function createWindow() {
   pdfPrint.hide();
 
   ipcMain.on('print-to-pdf', function (event, incomingInvoice) {
-    pdfPrint.loadURL('http://localhost:3000/#/invoice-preview');
+    // pdfPrint.loadURL('http://localhost:3000/#/invoice-preview');
+    pdfPrint.loadURL(
+      isDev
+        ? 'http://localhost:3000/#/invoice-preview'
+        : `file://${path.join(
+            __dirname,
+            '../build/index.html#/invoice-preview'
+          )}`
+    );
 
     const options = {
       marginsType: 0,
@@ -100,7 +130,15 @@ function createWindow() {
   printPaper.hide();
 
   ipcMain.on('print-paper', function (event) {
-    printPaper.loadURL('http://localhost:3000/#/invoice-preview');
+    // printPaper.loadURL('http://localhost:3000/#/invoice-preview');
+    printPaper.loadURL(
+      isDev
+        ? 'http://localhost:3000/#/invoice-preview'
+        : `file://${path.join(
+            __dirname,
+            '../build/index.html#/invoice-preview'
+          )}`
+    );
 
     const options = {
       silent: false,
