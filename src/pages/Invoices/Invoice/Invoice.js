@@ -53,7 +53,7 @@ const Invoice = (props) => {
   const savePdf = () => {
     ipcRenderer.send('print-to-pdf', sendInvoiceInfo);
 
-    dialog.showMessageBox({ message: 'File sačuvan!' });
+    dialog.showMessageBox({ message: 'File sačuvan' });
   };
 
   const openInvoice = () => {
@@ -77,6 +77,8 @@ const Invoice = (props) => {
 
       if (response.response === 0) {
         db.invoices.delete(id);
+
+        dialog.showMessageBox({ message: 'Račun obrisan' });
 
         history.push({
           pathname: '/invoices',
@@ -406,9 +408,9 @@ const Invoice = (props) => {
         >
           Izmijeni račun
         </Button>
-        <Link to="/add-invoice">
+        {/* <Link to="/add-invoice">
           <Button>Dodaj novi račun</Button>
-        </Link>
+        </Link> */}
 
         <Button onClick={savePdf}>Napravi PDF računa</Button>
         <Button onClick={openInvoice}>Pregled računa</Button>
