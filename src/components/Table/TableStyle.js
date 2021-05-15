@@ -3,6 +3,18 @@ import styled from 'styled-components';
 const TableContainer = styled.div`
   margin-bottom: 1rem;
 
+  .search {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    padding: 0 1rem 1rem;
+    font-size: 14px;
+
+    span {
+      margin: 0 0.5rem 0 0;
+    }
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;

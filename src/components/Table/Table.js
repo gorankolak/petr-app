@@ -64,13 +64,13 @@ export const DefaultTable = (props) => {
 
   return (
     <TableContainer>
-      <span>
-        Pretraga:{' '}
+      <div className="search">
+        <span>Pretraga:</span>
         <input
           value={globalFilter || ''}
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
-      </span>
+      </div>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
