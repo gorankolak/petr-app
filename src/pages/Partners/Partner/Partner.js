@@ -122,22 +122,24 @@ const Partner = (props) => {
 
   if (editPartner === false) {
     partnerDisplay = (
-      <div className="formWrapper">
-        <div className="formColumn">
-          <h2>Kupac</h2>
-          <div className="formItem">
-            Naziv kupca: <strong>{partner.name}</strong>
-          </div>
+      <>
+        <h2>Kupac</h2>
+        <div className="formWrapper">
+          <div className="formColumn">
+            <div className="formItem">
+              Naziv kupca: <strong>{partner.name}</strong>
+            </div>
 
-          <div className="formItem">
-            Adresa kupca: <strong>{partner.address}</strong>
-          </div>
+            <div className="formItem">
+              Adresa kupca: <strong>{partner.address}</strong>
+            </div>
 
-          <div className="formItem">
-            Datum dodavanja: <strong>{partner.dateAdded}</strong>
+            <div className="formItem">
+              Datum dodavanja: <strong>{partner.dateAdded}</strong>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   } else {
     partnerDisplay = (

@@ -125,60 +125,63 @@ const Invoice = (props) => {
 
   if (editInvoice === false) {
     invoiceDisplay = (
-      <div className="formWrapper">
-        <div className="formColumn">
-          <h2>Račun br. {invoice.invoiceNumber}</h2>
-          {/* <div className="formItem">
+      <>
+        <h2>Račun br. {invoice.invoiceNumber}</h2>
+
+        <div className="formWrapper">
+          <div className="formColumn">
+            {/* <div className="formItem">
 
             </div> */}
 
-          <div className="formItem">
-            Datum izdavanja: <strong>{invoice.invoiceDate}</strong>
+            <div className="formItem">
+              Datum izdavanja: <strong>{invoice.invoiceDate}</strong>
+            </div>
+
+            <div className="formItem">
+              Stanje računa: <strong>{invoice.invoiceState}</strong>
+            </div>
+
+            <div className="formItem">
+              Otpremnice br <strong>{invoice.dlvNoteNumber}</strong>
+            </div>
+
+            <div className="formItem">
+              Narudžbenica br. <strong>{invoice.orderNumber}</strong>
+            </div>
+
+            <div className="formItem">
+              Šifra dobavljača <strong>{invoice.supplierCode}</strong>
+            </div>
           </div>
 
-          <div className="formItem">
-            Stanje računa: <strong>{invoice.invoiceState}</strong>
-          </div>
+          <div className="formColumn">
+            <div className="formItem">
+              Odabir artikala <strong>{invoice.articles}</strong>
+            </div>
 
-          <div className="formItem">
-            Otpremnice br <strong>{invoice.dlvNoteNumber}</strong>
-          </div>
+            <div className="formItem">
+              Vrsta računa <strong>{invoice.invoiceType}</strong>
+            </div>
 
-          <div className="formItem">
-            Narudžbenica br. <strong>{invoice.orderNumber}</strong>
-          </div>
+            <div className="formItem">
+              Stanje <strong>{invoice.invoiceState}</strong>
+            </div>
 
-          <div className="formItem">
-            Šifra dobavljača <strong>{invoice.supplierCode}</strong>
+            <div className="formItem">
+              Datum isporuke <strong>{invoice.deliveryDate}</strong>
+            </div>
+
+            <div className="formItem">
+              Napomena <strong>{invoice.invoiceNote}</strong>
+            </div>
+
+            <div className="formItem">
+              Iznos računa <strong>{invoice.deliveryDate}</strong>
+            </div>
           </div>
         </div>
-
-        <div className="formColumn">
-          <div className="formItem">
-            Odabir artikala <strong>{invoice.articles}</strong>
-          </div>
-
-          <div className="formItem">
-            Vrsta računa <strong>{invoice.invoiceType}</strong>
-          </div>
-
-          <div className="formItem">
-            Stanje <strong>{invoice.invoiceState}</strong>
-          </div>
-
-          <div className="formItem">
-            Datum isporuke <strong>{invoice.deliveryDate}</strong>
-          </div>
-
-          <div className="formItem">
-            Napomena <strong>{invoice.invoiceNote}</strong>
-          </div>
-
-          <div className="formItem">
-            Iznos računa <strong>{invoice.deliveryDate}</strong>
-          </div>
-        </div>
-      </div>
+      </>
     );
   } else {
     invoiceDisplay = (

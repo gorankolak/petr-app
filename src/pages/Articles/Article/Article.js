@@ -76,18 +76,20 @@ const Article = (props) => {
 
   if (editArticle === false) {
     articleDisplay = (
-      <div className="formWrapper">
-        <div className="formColumn">
-          <h2>Artikl</h2>
-          <div className="formItem">
-            Naziv artikla: <strong>{article.name}</strong>
-          </div>
+      <>
+        <h2>Artikl</h2>
+        <div className="formWrapper">
+          <div className="formColumn">
+            <div className="formItem">
+              Naziv artikla: <strong>{article.name}</strong>
+            </div>
 
-          <div className="formItem">
-            Vrsta artikla: <strong>{article.type}</strong>
+            <div className="formItem">
+              Vrsta artikla: <strong>{article.type}</strong>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   } else {
     articleDisplay = (
