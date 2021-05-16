@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import db from '../../../services/db';
 
-import { MainFooter } from '../../../components/mainFooter/mainFooter';
+import { MainFooter } from '../../../components/MainFooter/MainFooter';
 import { Button } from '../../../components/Components';
 import InvoiceStyle from './InvoiceStyle';
 

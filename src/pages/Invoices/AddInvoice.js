@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import db from '../../services/db';
 
-import { MainFooter } from '../../components/mainFooter/mainFooter';
+import { MainFooter } from '../../components/MainFooter/MainFooter';
 import { Button } from '../../components/Components';
 import AddInvoiceStyle from './AddInvoiceStyle';
 
@@ -303,7 +303,7 @@ const AddInvoice = () => {
             </div>
           </div>
 
-          <div className="formColumn">
+          <div className="formColumn accent">
             <h3>Sadržaj računa</h3>
             <p>
               <span>Broj računa:</span>

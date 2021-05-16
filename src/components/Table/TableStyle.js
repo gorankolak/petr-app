@@ -53,6 +53,10 @@ const TableContainer = styled.div`
       td {
         padding: 0.25rem 1rem;
         border-bottom: 1px solid #eee;
+        max-width: 200px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }

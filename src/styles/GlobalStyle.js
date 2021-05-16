@@ -29,7 +29,32 @@ const GlobalStyle = createGlobalStyle`
     .formColumn {
       width: 240px;
 
-      &:nth-child(3) {
+      /* &:nth-child(3) {
+        padding: 1rem;
+        background-color: ${(props) => props.theme.color.dust};
+        box-shadow: 0 20px 30px 0 rgb(12 0 46 / 5%);
+        border-radius: 20px;
+
+        p {
+          margin-bottom: 5px;
+          line-height: 1.3;
+        }
+
+        span {
+          font-size: 14px;
+
+          &:nth-child(1) {
+            margin-right: 0.5em;
+            font-weight: 300;
+          }
+
+          &:nth-child(2) {
+            font-weight: bold;
+          }
+        }
+      } */
+
+      &.accent {
         padding: 1rem;
         background-color: ${(props) => props.theme.color.dust};
         box-shadow: 0 20px 30px 0 rgb(12 0 46 / 5%);

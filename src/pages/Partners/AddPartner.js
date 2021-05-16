@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import db from '../../services/db';
 
-import { MainFooter } from '../../components/mainFooter/mainFooter';
+import { MainFooter } from '../../components/MainFooter/MainFooter';
 import { Button } from '../../components/Components';
 import AddPartnerStyle from './AddPartnerStyle';
 

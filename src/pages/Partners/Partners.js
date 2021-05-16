@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import db from '../../services/db';
 
 import { DefaultTable } from '../../components/Table/Table';
-import { MainFooter } from '../../components/mainFooter/mainFooter';
+import { MainFooter } from '../../components/MainFooter/MainFooter';
 import { Button } from '../../components/Components';
 import TableContainer from './PartnersStyle';
 import AddPartner from './AddPartner';

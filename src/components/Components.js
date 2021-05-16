@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 const Button = styled.button`
   padding: 0.5em 1em;
+  margin: 0.5em 0 0 0.5em;
   color: ${(props) => props.theme.color.white};
   background-color: ${(props) => props.theme.color.black};
   font-weight: bold;
