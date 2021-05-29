@@ -22,12 +22,20 @@ const InvoicePreviewStyle = styled.div`
     padding-top: 1rem;
     margin-bottom: 1rem;
 
+    p {
+      line-height: 1.35;
+    }
+
     .first {
       width: 60%;
 
       p {
         font-size: 12px;
         font-style: italic;
+
+        @media print {
+          font-size: 16px;
+        }
       }
     }
 
@@ -36,6 +44,10 @@ const InvoicePreviewStyle = styled.div`
 
       p {
         font-size: 12px;
+
+        @media print {
+          font-size: 16px;
+        }
       }
     }
   }
@@ -44,18 +56,31 @@ const InvoicePreviewStyle = styled.div`
     font-size: 16px;
     padding-bottom: 0;
     /* margin-bottom: 0.5em; */
+
+    @media print {
+      font-size: 21px;
+    }
   }
 
   .label {
     font-size: 8px;
     margin-bottom: 0;
+    color: #666;
+
+    @media print {
+      font-size: 10px;
+    }
   }
 
   .content {
     font-size: 12px;
-    line-height: 1.5;
-    font-weight: 700;
+    line-height: 1.3;
+    /* font-weight: 700; */
     margin-bottom: 0.5em;
+
+    @media print {
+      font-size: 16px;
+    }
   }
 
   .half {
@@ -65,7 +90,7 @@ const InvoicePreviewStyle = styled.div`
   .topwrap {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 
     .first,
     .second {
@@ -83,15 +108,23 @@ const InvoicePreviewStyle = styled.div`
 
     table {
       width: 100%;
+      border-spacing: 0;
     }
 
     thead {
-      background: ${(props) => props.theme.color.grey};
+      /* background: ${(props) => props.theme.color.grey}; */
+      background: lightgray;
       font-size: 10px;
+
+      @media print {
+        font-size: 13px;
+      }
 
       th {
         padding: 5px;
         line-height: 1.2;
+        font-weight: normal;
+        /* border-bottom: 1px solid ${(props) => props.theme.color.black}; */
       }
     }
 
@@ -100,7 +133,21 @@ const InvoicePreviewStyle = styled.div`
       font-size: 10px;
       line-height: 1.3;
       text-align: center;
-      border-bottom: 1px solid ${(props) => props.theme.color.grey};
+      /* border-bottom: 1px solid ${(props) => props.theme.color.grey}; */
+      /* border-bottom: 1px solid ${(props) => props.theme.color.black}; */
+      border-bottom: 1px solid gray;
+
+      @media print {
+        font-size: 13px;
+      }
+    }
+
+    tr {
+      &:last-child {
+        td {
+          /* border-bottom: 1px solid ${(props) => props.theme.color.black}; */
+        }
+      }
     }
   }
 
@@ -113,11 +160,19 @@ const InvoicePreviewStyle = styled.div`
     .total-label {
       padding-right: 20px;
       font-size: 12px;
+
+      @media print {
+        font-size: 16px;
+      }
     }
 
     .total-price {
       font-size: 16px;
       font-weight: 700;
+
+      @media print {
+        font-size: 21px;
+      }
     }
   }
 
@@ -133,6 +188,29 @@ const InvoicePreviewStyle = styled.div`
     padding-top: 1rem;
     font-size: 8px;
     border-top: 1px solid ${(props) => props.theme.color.black_disabled};
+    /* border-top: 1px solid ${(props) => props.theme.color.black}; */
+    border-top: 1px solid gray;
+
+    @media print {
+      font-size: 10px;
+    }
+
+    p {
+      font-size: 8px;
+      margin-bottom: 0;
+
+      &:not(.label) {
+        /* line-height: 1.5; */
+      }
+
+      &.label {
+        line-height: 1.7;
+      }
+
+      @media print {
+        font-size: 10px;
+      }
+    }
 
     div {
       width: calc(100% / 3);
@@ -205,7 +283,7 @@ const InvoicePreview = (props) => {
           <p className="content">-</p>
         </div>
         <div className="third">
-          <p className="label">Datum isporuke</p>
+          <p className="label">Kupac</p>
           <h1>{invoices.partner}</h1>
         </div>
       </div>
@@ -281,13 +359,13 @@ const InvoicePreview = (props) => {
       <div className="footer">
         <div className="first">
           <p className="label">Adresa</p>
-          <p className="label">
+          <p>
             Kolodvorska 74, <br /> 32284 Stari Mikanovci
           </p>
         </div>
         <div className="second">
           <p className="label">Pravni podaci</p>
-          <p className="label">
+          <p>
             OIB: 46827770736 <br /> Žiro račun: 2484008-1101347725 <br /> IBAN:
             HR1824840081101347725 <br /> IBAN: HR9224070001100495989 <br />{' '}
             SWIFT: RZBHHR2X <br />
@@ -296,7 +374,7 @@ const InvoicePreview = (props) => {
         </div>
         <div className="third">
           <p className="label">Kontakt</p>
-          <p className="label">
+          <p>
             tel: 032 / 210 347
             <br /> fax: 032 / 210 318
           </p>

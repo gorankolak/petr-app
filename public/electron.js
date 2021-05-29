@@ -141,9 +141,9 @@ function createWindow() {
     );
 
     const options = {
-      silent: false,
+      silent: true,
       printBackground: true,
-      color: false,
+      color: true,
       margin: {
         marginType: 'printableArea',
       },
@@ -151,8 +151,6 @@ function createWindow() {
       pagesPerSheet: 1,
       collate: false,
       copies: 1,
-      header: 'Header of the Page',
-      footer: 'Footer of the Page',
     };
 
     // printPaper.webContents.print(options, (success, failureReason) => {
