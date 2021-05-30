@@ -31,10 +31,6 @@ const Partners = () => {
       Header: 'Adresa',
       accessor: 'address',
     },
-    {
-      Header: 'Datum dodavanja',
-      accessor: 'dateAdded',
-    },
   ];
 
   let partnersData;

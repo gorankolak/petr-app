@@ -5,6 +5,10 @@ const ArticleStyle = styled.div`
   h2 {
     margin-bottom: 2rem;
   }
+
+  .formWrapper {
+    width: 75%;
+  }
 `;
 
 export default ArticleStyle;

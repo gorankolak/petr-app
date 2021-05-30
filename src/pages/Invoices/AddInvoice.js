@@ -50,7 +50,7 @@ const AddInvoice = () => {
     e.preventDefault();
 
     if (
-      partner !== '' &&
+      (partner !== '' || history.location.state !== undefined) &&
       invoiceNumber !== '' &&
       invoiceDate !== '' &&
       dlvNoteNumber !== '' &&
@@ -113,6 +113,7 @@ const AddInvoice = () => {
                   onChange={(e) => setInvoiceNumber(e.target.value)}
                   value={invoiceNumber}
                 />
+
                 <Button
                   tableBtn
                   onClick={(e) => {
@@ -311,7 +312,11 @@ const AddInvoice = () => {
             </p>
             <p>
               <span>Kupac:</span>
-              <span>{partner}</span>
+              <span>
+                {history.location.state !== undefined
+                  ? history.location.state.name
+                  : partner}
+              </span>
             </p>
             <p>
               <span>Datum računa:</span>

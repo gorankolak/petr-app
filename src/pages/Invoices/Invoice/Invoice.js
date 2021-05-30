@@ -135,49 +135,60 @@ const Invoice = (props) => {
             </div> */}
 
             <div className="formItem">
-              Datum izdavanja: <strong>{invoice.invoiceDate}</strong>
+              <p className="label">Datum izdavanja</p>
+              <p className="content">{invoice.invoiceDate}</p>
             </div>
 
             <div className="formItem">
-              Stanje računa: <strong>{invoice.invoiceState}</strong>
+              <p className="label">Stanje računa</p>
+              <p className="content">{invoice.invoiceState}</p>
             </div>
 
             <div className="formItem">
-              Otpremnice br <strong>{invoice.dlvNoteNumber}</strong>
+              <p className="label">Otpremnice br.</p>
+              <p className="content">{invoice.dlvNoteNumber}</p>
             </div>
 
             <div className="formItem">
-              Narudžbenica br. <strong>{invoice.orderNumber}</strong>
+              <p className="label">Narudžbenica br.</p>
+              <p className="content">{invoice.orderNumber}</p>
             </div>
 
             <div className="formItem">
-              Šifra dobavljača <strong>{invoice.supplierCode}</strong>
+              <p className="label">Šifra dobavljača</p>
+              <p className="content">{invoice.supplierCode}</p>
             </div>
           </div>
 
           <div className="formColumn">
             <div className="formItem">
-              Odabir artikala <strong>{invoice.articles}</strong>
+              <p className="label">Odabir artikala</p>
+              <p className="content">{invoice.articles}</p>
             </div>
 
             <div className="formItem">
-              Vrsta računa <strong>{invoice.invoiceType}</strong>
+              <p className="label">Vrsta računa</p>
+              <p className="content">{invoice.invoiceType}</p>
             </div>
 
             <div className="formItem">
-              Stanje <strong>{invoice.invoiceState}</strong>
+              <p className="label">Stanje</p>
+              <p className="content">{invoice.invoiceState}</p>
             </div>
 
             <div className="formItem">
-              Datum isporuke <strong>{invoice.deliveryDate}</strong>
+              <p className="label">Datum isporuke</p>
+              <p className="content">{invoice.deliveryDate}</p>
             </div>
 
             <div className="formItem">
-              Napomena <strong>{invoice.invoiceNote}</strong>
+              <p className="label">Napomena</p>
+              <p className="content">{invoice.invoiceNote}</p>
             </div>
 
             <div className="formItem">
-              Iznos računa <strong>{invoice.deliveryDate}</strong>
+              <p className="label">Iznos računa</p>
+              <p className="content">{invoice.deliveryDate}</p>
             </div>
           </div>
         </div>
@@ -188,7 +199,7 @@ const Invoice = (props) => {
       <form onSubmit={changeInvoice}>
         <h2>Izmjena računa</h2>
 
-        <div className="formWrapper">
+        <div className="formWrapper editInvoice">
           <div className="formColumn">
             <div className="formItem">
               Račun br.{' '}
@@ -352,9 +363,7 @@ const Invoice = (props) => {
               </div>
             </div>
 
-            <div className="formItem">
-              Iznos računa: <strong>{invoice.invoiceTotal}</strong>
-            </div>
+            <div className="formItem">Iznos računa: {invoice.invoiceTotal}</div>
 
             <div>
               <Button

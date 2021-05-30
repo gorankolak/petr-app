@@ -19,6 +19,25 @@ const GlobalStyle = createGlobalStyle`
       margin-top: 1em;
     }
 
+    .label {
+      margin: 0;
+      /* color: gray; */
+      /* font-size: 12px; */
+      /* font-weight: 700; */
+      text-transform: uppercase;
+    }
+
+    .content {
+      font-weight: 600;
+    }
+
+    .icons {
+      /* margin: 0 1em 0 0; */
+      /* display: flex;
+      align-items: center; */
+      vertical-align: bottom;
+    }
+
     .formWrapper {
       display: flex;
       width: 100%;

@@ -5,6 +5,14 @@ const InvoiceStyle = styled.div`
   h2 {
     margin-bottom: 2rem;
   }
+
+  .formWrapper {
+    width: 75%;
+
+    &.editInvoice {
+      width: 100%;
+    }
+  }
 `;
 
 export default InvoiceStyle;

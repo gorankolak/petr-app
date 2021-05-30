@@ -81,11 +81,13 @@ const Article = (props) => {
         <div className="formWrapper">
           <div className="formColumn">
             <div className="formItem">
-              Naziv artikla: <strong>{article.name}</strong>
+              <p className="label">Naziv artikla </p>
+              <p className="content">{article.name}</p>
             </div>
 
             <div className="formItem">
-              Vrsta artikla: <strong>{article.type}</strong>
+              <p className="label">Vrsta artikla</p>
+              <p className="content">{article.type}</p>
             </div>
           </div>
         </div>

@@ -19,7 +19,7 @@ const Partner = (props) => {
 
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
-  const [dateAdded, setDateAdded] = useState('');
+  // const [dateAdded, setDateAdded] = useState('');
 
   useEffect(() => {
     const getPartners = async () => {
@@ -102,7 +102,7 @@ const Partner = (props) => {
     const newPartner = {
       name,
       address,
-      dateAdded,
+      // dateAdded,
     };
 
     await db.partners.update(partner.id, newPartner);
@@ -114,7 +114,7 @@ const Partner = (props) => {
     setPartner(updatedPartner);
     setName('');
     setAddress('');
-    setDateAdded('');
+    // setDateAdded('');
     setEditPartner(false);
   };
 
@@ -127,17 +127,21 @@ const Partner = (props) => {
         <div className="formWrapper">
           <div className="formColumn">
             <div className="formItem">
-              Naziv kupca: <strong>{partner.name}</strong>
-            </div>
-
-            <div className="formItem">
-              Adresa kupca: <strong>{partner.address}</strong>
-            </div>
-
-            <div className="formItem">
-              Datum dodavanja: <strong>{partner.dateAdded}</strong>
+              <p className="label">Naziv kupca</p>
+              <p className="content">{partner.name}</p>
             </div>
           </div>
+
+          <div className="formColumn">
+            <div className="formItem">
+              <p className="label">Adresa kupca</p>
+              <p className="content">{partner.address}</p>
+            </div>
+          </div>
+
+          {/* <div className="formItem">
+              Datum dodavanja: <strong>{partner.dateAdded}</strong>
+            </div> */}
         </div>
       </>
     );
@@ -158,6 +162,9 @@ const Partner = (props) => {
                 value={name}
               />
             </div>
+          </div>
+
+          <div className="formColumn">
             <div className="formItem">
               Adresa kupca{' '}
               <input
@@ -169,7 +176,7 @@ const Partner = (props) => {
               />
             </div>
 
-            <div className="formItem">
+            {/* <div className="formItem">
               Datum dodavanja{' '}
               <input
                 type="text"
@@ -178,23 +185,22 @@ const Partner = (props) => {
                 onChange={(e) => setDateAdded(e.target.value)}
                 value={dateAdded}
               />
-            </div>
-
-            <div>
-              <Button
-                onClick={() => {
-                  setEditPartner(false);
-                  setName('');
-                  setAddress('');
-                  setDateAdded('');
-                }}
-              >
-                Otkaži izmjenu
-              </Button>
-
-              <Button type="submit">Spremi izmjene</Button>
-            </div>
+            </div> */}
           </div>
+        </div>
+        <div className="buttonsWrapper">
+          <Button
+            onClick={() => {
+              setEditPartner(false);
+              setName('');
+              setAddress('');
+              // setDateAdded('');
+            }}
+          >
+            Otkaži izmjenu
+          </Button>
+
+          <Button type="submit">Spremi izmjene</Button>
         </div>
       </form>
     );
@@ -220,8 +226,7 @@ const Partner = (props) => {
       {partnerDisplay}
 
       <h3>Izdani računi:</h3>
-
-      {invoicesList}
+      <div className="partnerTable">{invoicesList}</div>
 
       <MainFooter>
         <Link to="/partners">
@@ -242,7 +247,7 @@ const Partner = (props) => {
             setEditPartner(true);
             setName(partner.name);
             setAddress(partner.address);
-            setDateAdded(partner.dateAdded);
+            // setDateAdded(partner.dateAdded);
           }}
         >
           Izmijeni podatke kupca
