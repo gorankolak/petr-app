@@ -31,11 +31,19 @@ const GlobalStyle = createGlobalStyle`
       font-weight: 600;
     }
 
-    .icons {
-      /* margin: 0 1em 0 0; */
-      /* display: flex;
-      align-items: center; */
-      vertical-align: bottom;
+    .thContent {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .thIcon {
+      display: flex;
+      /* width: 2em; */
+      
+      svg {
+        height: 100%;
+      }
     }
 
     .formWrapper {

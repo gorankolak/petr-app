@@ -7,6 +7,8 @@ import {
 } from 'react-table';
 import db from '../../services/db';
 
+import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
+
 import { useHistory } from 'react-router-dom';
 // import MOCK_DATA from './MOCK_DATA.json';
 // import { COLUMNS } from './Columns';
@@ -77,7 +79,20 @@ export const DefaultTable = (props) => {
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
+                  <div className="thContent">
+                    {column.render('Header')}
+                    <span className="thIcon">
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <FiArrowDown />
+                        ) : (
+                          <FiArrowUp />
+                        )
+                      ) : (
+                        ''
+                      )}
+                    </span>
+                  </div>
                 </th>
               ))}
             </tr>
