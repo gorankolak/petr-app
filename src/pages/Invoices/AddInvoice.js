@@ -199,7 +199,7 @@ const AddInvoice = () => {
           </div>
 
           <div className="formColumn">
-            <div className="formItem">
+            {/* <div className="formItem">
               <label htmlFor="articles">Odabir artikala</label>
               <input
                 type="text"
@@ -211,8 +211,7 @@ const AddInvoice = () => {
                 }}
               />
 
-              {/* omogućiti izbor više artikala + količina za svakog */}
-            </div>
+            </div> */}
 
             {/* <div className="formItem">
               <label htmlFor="invoiceType">Vrsta računa</label>
@@ -359,7 +358,9 @@ const AddInvoice = () => {
         </div>
 
         <div className="formItemAdd">
-          <Button type="submit">Dodaj račun</Button>
+          <Link to="/add-invoice-articles">
+            <Button>Dodaj artikle</Button>
+          </Link>
         </div>
       </form>
 

@@ -15,6 +15,11 @@ const Article = (props) => {
 
   const [name, setName] = useState('');
   const [type, setType] = useState('');
+  const [measure, setMeasure] = useState('');
+  const [tax, setTax] = useState('');
+  const [rebateBase, setRebateBase] = useState('');
+  const [rebateAdded, setRebateAdded] = useState('');
+  const [price, setPrice] = useState('');
 
   useEffect(() => {
     const getArticles = async () => {
@@ -54,22 +59,38 @@ const Article = (props) => {
 
   const changeArticle = async (e) => {
     e.preventDefault();
+    // TO DO: Provjeriti dodatna ograničenja koja trebaju biti stavljena na pojedina polja
+    if (name !== '' && type !== '' && measure !== ''
+          && tax !== '' && rebateBase !== '' && rebateAdded !== '' && price !== '' 
+          && tax >= 0 && rebateBase >= 0 && rebateAdded >= 0 && price >= 0) {
+      const newArticle = {
+        name,
+        type,
+        measure,
+        tax,
+        rebateBase,
+        rebateAdded,
+        price
+      };
 
-    const newArticle = {
-      name,
-      type,
-    };
+      await db.articles.update(article.id, newArticle);
 
-    await db.articles.update(article.id, newArticle);
+      const updatedArticle = await db.articles.get({
+        name: name,
+      });
 
-    const updatedArticle = await db.articles.get({
-      name: name,
-    });
-
-    setArticle(updatedArticle);
-    setName('');
-    setType('');
-    setEditArticle(false);
+      setArticle(updatedArticle);
+      setName('');
+      setType('');
+      setMeasure('');
+      setTax('');
+      setRebateBase('');
+      setRebateAdded('');
+      setPrice('');
+      setEditArticle(false);
+    } else {
+      dialog.showMessageBox({ message: 'Podaci o artiklu su nepotpuni' });
+    }
   };
 
   let articleDisplay;
@@ -88,6 +109,31 @@ const Article = (props) => {
             <div className="formItem">
               <p className="label">Vrsta artikla</p>
               <p className="content">{article.type}</p>
+            </div>
+
+            <div className="formItem">
+              <p className="label">Jedinica mjere</p>
+              <p className="content">{article.measure}</p>
+            </div>
+
+            <div className="formItem">
+              <p className="label">PDV</p>
+              <p className="content">{article.tax}</p>
+            </div>
+
+            <div className="formItem">
+              <p className="label">Rabat osnovni</p>
+              <p className="content">{article.rebateBase}</p>
+            </div>
+
+            <div className="formItem">
+              <p className="label">Rabat dodani</p>
+              <p className="content">{article.rebateAdded}</p>
+            </div>
+
+            <div className="formItem">
+              <p className="label">Cijena</p>
+              <p className="content">{article.price}</p>
             </div>
           </div>
         </div>
@@ -120,13 +166,67 @@ const Article = (props) => {
                 value={type}
               />
             </div>
-
+            <div className="formItem">
+              Jedinica mjere{' '}
+              <input
+                type="text"
+                id="measure"
+                placeholder={article.measure}
+                onChange={(e) => setMeasure(e.target.value)}
+                value={measure}
+              />
+            </div>
+            <div className="formItem">
+              PDV{' '}
+              <input
+                type="number"
+                id="tax"
+                placeholder={article.tax}
+                onChange={(e) => setTax(e.target.value)}
+                value={tax}
+              />
+            </div>
+            <div className="formItem">
+              Rabat osnovni{' '}
+              <input
+                type="number"
+                id="rebateBase"
+                placeholder={article.rebateBase}
+                onChange={(e) => setRebateBase(e.target.value)}
+                value={rebateBase}
+              />
+            </div>
+            <div className="formItem">
+              Rabat dodani{' '}
+              <input
+                type="text"
+                id="rebateAdded"
+                placeholder={article.rebateAdded}
+                onChange={(e) => setRebateAdded(e.target.value)}
+                value={rebateAdded}
+              />
+            </div>
+            <div className="formItem">
+              Cijena{' '}
+              <input
+                type="text"
+                id="price"
+                placeholder={article.price}
+                onChange={(e) => setPrice(e.target.value)}
+                value={price}
+              />
+            </div>
             <div>
               <Button
                 onClick={() => {
                   setEditArticle(false);
                   setName('');
                   setType('');
+                  setMeasure('');
+                  setTax('');
+                  setRebateBase('');
+                  setRebateAdded('');
+                  setPrice('');
                 }}
               >
                 Otkaži izmjenu
@@ -154,6 +254,11 @@ const Article = (props) => {
             setEditArticle(true);
             setName(article.name);
             setType(article.type);
+            setMeasure(article.measure);
+            setTax(article.tax);
+            setRebateBase(article.rebateBase);
+            setRebateAdded(article.rebateAdded);
+            setPrice(article.price);
           }}
         >
           Izmijeni artikl

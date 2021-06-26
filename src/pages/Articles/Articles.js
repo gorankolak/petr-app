@@ -22,12 +22,32 @@ const Articles = () => {
 
   const COLUMNS = [
     {
-      Header: 'Naziva artikla',
+      Header: 'Naziv artikla',
       accessor: 'name',
     },
     {
       Header: 'Vrsta artikla',
       accessor: 'type',
+    },
+    {
+      Header: 'Jed. mjere',
+      accessor: 'measure',
+    },
+    {
+      Header: 'PDV',
+      accessor: 'tax',
+    },
+    {
+      Header: 'Rabat osn.',
+      accessor: 'rebateBase',
+    },
+    {
+      Header: 'Rabat dodani',
+      accessor: 'rebateAdded',
+    },
+    {
+      Header: 'Cijena',
+      accessor: 'price',
     },
   ];
 

@@ -12,15 +12,27 @@ const AddArticle = () => {
   const history = useHistory();
   const [name, setName] = useState([]);
   const [type, setType] = useState([]);
+  const [measure, setMeasure] = useState('');
+  const [tax, setTax] = useState('');
+  const [rebateBase, setRebateBase] = useState('');
+  const [rebateAdded, setRebateAdded] = useState('');
+  const [price, setPrice] = useState('');
   let newArticle;
 
   const submitArticle = (e) => {
     e.preventDefault();
-
-    if (name != '' && type != '') {
+    // TO DO: Prilikom uređenja forme, treba razbiti if u manje dijelove. One informacije koje su neispravne moraju dati neku vrstu warninga u odgovarajućem polje 
+    if (name !== '' && type !== '' && measure !== ''
+          && tax !== '' && rebateBase !== '' && rebateAdded !== '' && price !== '' 
+          && tax >= 0 && rebateBase >= 0 && rebateAdded >= 0 && price >= 0) {
       newArticle = {
         name,
         type,
+        measure,
+        tax,
+        rebateBase,
+        rebateAdded,
+        price
       };
 
       dialog.showMessageBox({ message: 'Artikl uspješno dodan' });
@@ -60,6 +72,51 @@ const AddArticle = () => {
               type="text"
               id="type"
               onChange={(e) => setType(e.target.value)}
+            />
+          </div>
+
+          <div className="formItem">
+            <label htmlFor="type">Jedinica mjere</label>
+            <input
+              type="text"
+              id="measure"
+              onChange={(e) => setMeasure(e.target.value)}
+            />
+          </div>
+
+          <div className="formItem">
+            <label htmlFor="type">PDV</label>
+            <input
+              type="number"
+              id="type"
+              onChange={(e) => setTax(e.target.value)}
+            />
+          </div>
+
+          <div className="formItem">
+            <label htmlFor="type">Rabat osnovni</label>
+            <input
+              type="number"
+              id="type"
+              onChange={(e) => setRebateBase(e.target.value)}
+            />
+          </div>
+
+          <div className="formItem">
+            <label htmlFor="type">Rabat dodani</label>
+            <input
+              type="number"
+              id="type"
+              onChange={(e) => setRebateAdded(e.target.value)}
+            />
+          </div>
+
+          <div className="formItem">
+            <label htmlFor="type">Cijena</label>
+            <input
+              type="number"
+              id="type"
+              onChange={(e) => setPrice(e.target.value)}
             />
           </div>
 

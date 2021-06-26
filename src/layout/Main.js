@@ -17,6 +17,7 @@ import Article from '../pages/Articles/Article/Article';
 import AddPartner from '../pages/Partners/AddPartner';
 import AddInvoice from '../pages/Invoices/AddInvoice';
 import AddArticle from '../pages/Articles/AddArticle';
+import AddArticles from '../pages/Invoices/AddArticles';
 
 const Main = () => {
   return (
@@ -39,6 +40,7 @@ const Main = () => {
           <Route path="/add-partner" component={AddPartner} />
           <Route path="/add-invoice" component={AddInvoice} />
           <Route path="/add-article" component={AddArticle} />
+          <Route path="/add-invoice-articles" component={AddArticles} />
         </Switch>
       </div>
     </MainStyle>

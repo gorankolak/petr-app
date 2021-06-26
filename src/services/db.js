@@ -6,7 +6,7 @@ db.version(1).stores({
   partners: '++id, name, address, dateAdded',
   invoices:
     '++id, partner, invoiceNumber, invoiceDate, dlvNoteNumber, orderNumber, deliveryDate, supplierCode, invoiceType, invoiceState, articles, invoiceNote, invoiceTotal',
-  articles: '++id, name, type',
+  articles: '++id, name, type, measure, tax, rebateBase, rebateAdded, price',
   dlvNotes: '++id, dlvNoteNumber, dlvNoteDate',
   invoicePreview: 'invID',
 });
