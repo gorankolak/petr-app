@@ -44,11 +44,47 @@ const AddInvoice = () => {
     getPartners();
   }, []);
 
-  console.log(invoicesAll.length);
+  useEffect(() => {
+    checkEnable();
+  }, [supplierCode, invoiceNumber, dlvNoteNumber, orderNumber, invoiceDate, deliveryDate, partner, invoiceState, invoiceType]);
 
+  const checkEnable = () => {
+    const addArticleButton = document.getElementById('addArticleButton');
+    if (
+      (partner !== '' ) &&
+      invoiceNumber !== '' &&
+      invoiceDate !== '' &&
+      dlvNoteNumber !== '' &&
+      orderNumber !== '' &&
+      deliveryDate !== '' &&
+      supplierCode !== '' &&
+      invoiceType !== '' &&
+      invoiceState !== ''
+      // invoiceNote !== ''
+      // (partner !== '' || history.location.state !== undefined)
+    ){
+      addArticleButton.disabled = false;
+    } else {
+      addArticleButton.disabled = true;
+    }
+  }
+
+  const clearFields = () => {
+    setPartner('');
+    setInvoiceNumber('');
+    setDlvNoteNumber('');
+    setOrderNumber('');
+    setInvoiceState('');
+    setInvoiceDate('');
+    setSupplierCode('');
+    setDeliveryDate('');
+    setInvoiceNote('');
+    setInvoiceType('');
+  }
+/*
   const submitInvoice = async (e) => {
     e.preventDefault();
-
+    console.log('submit invoice');
     if (
       (partner !== '' || history.location.state !== undefined) &&
       invoiceNumber !== '' &&
@@ -96,11 +132,11 @@ const AddInvoice = () => {
       dialog.showMessageBox({ message: 'Račun nije u potpunosti ispunjen' });
     }
   };
-
+*/
   return (
     <AddInvoiceStyle>
       <h2>Novi račun</h2>
-      <form onSubmit={submitInvoice}>
+      <form>
         <div className="formWrapper">
           <div className="formColumn">
             <div className="formItem">
@@ -153,7 +189,7 @@ const AddInvoice = () => {
 
               <div className="half">
                 <input
-                  type="text"
+                  type="date"
                   id="invoiceDate"
                   onChange={(e) => setInvoiceDate(e.target.value)}
                   value={invoiceDate}
@@ -228,7 +264,10 @@ const AddInvoice = () => {
                   type="radio"
                   name="type"
                   id="invoiceType"
-                  onChange={(e) => setInvoiceType('Račun')}
+                  onChange={(e) => {
+                    setInvoiceType('Račun');
+                    checkEnable();
+                  }}
                 />
                 <label htmlFor="invoiceType">Račun</label>
               </div>
@@ -237,8 +276,10 @@ const AddInvoice = () => {
                   type="radio"
                   name="type"
                   id="invoiceType"
-                  onChange={(e) =>
-                    setInvoiceType('Obavijest o knjiženju na teret')
+                  onChange={(e) =>{
+                      setInvoiceType('Obavijest o knjiženju na teret');
+                      checkEnable();
+                    }
                   }
                 />
                 <label htmlFor="invoiceType">
@@ -250,8 +291,10 @@ const AddInvoice = () => {
                   type="radio"
                   name="type"
                   id="invoiceType"
-                  onChange={(e) =>
-                    setInvoiceType('Obavijest o knjiženju u korist')
+                  onChange={(e) =>{
+                      setInvoiceType('Obavijest o knjiženju u korist')
+                      checkEnable();
+                  }
                   }
                 />
                 <label htmlFor="invoiceType">
@@ -267,7 +310,10 @@ const AddInvoice = () => {
                   type="radio"
                   name="invoiceState"
                   id="invoiceState"
-                  onChange={(e) => setInvoiceState('Plaćeno')}
+                  onChange={(e) => {
+                    setInvoiceState('Plaćeno');
+                    checkEnable();
+                  }}
                 />
                 <label htmlFor="invoiceType">Plaćeno</label>
               </div>
@@ -276,7 +322,10 @@ const AddInvoice = () => {
                   type="radio"
                   name="invoiceState"
                   id="invoiceState"
-                  onChange={(e) => setInvoiceState('Neplaćeno')}
+                  onChange={(e) => {
+                    setInvoiceState('Neplaćeno');
+                    checkEnable();
+                  }}
                 />
                 <label htmlFor="invoiceType">Neplaćeno</label>
               </div>
@@ -285,7 +334,7 @@ const AddInvoice = () => {
             <div className="formItem">
               <label htmlFor="deliveryDate">Datum isporuke</label>
               <input
-                type="text"
+                type="date"
                 id="deliveryDate"
                 onChange={(e) => setDeliveryDate(e.target.value)}
               />
@@ -359,7 +408,7 @@ const AddInvoice = () => {
 
         <div className="formItemAdd">
           <Link to="/add-invoice-articles">
-            <Button>Dodaj artikle</Button>
+            <Button id="addArticleButton" disabled={true}>Dodaj artikle</Button>
           </Link>
         </div>
       </form>

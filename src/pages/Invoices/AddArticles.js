@@ -17,15 +17,23 @@ const AddArticles = () => {
     const [type, setType] = useState('');
     const [quantity, setQuantity] = useState('');
     const [measure, setMeasure] = useState('kom');
-    const [total, setTotal] = useState(250);
+    const [price, setPrice] = useState(0);
+    const [returnFlag, setReturnFlag] = useState(false);
+    
 
     useEffect(() => {
         const getArticles = async () => {
             const articles = await db.articles.toArray();
             setArticlesDb(articles);
+            setId(articles[0].id);
+            setName(articles[0].name);
+            setType(articles[0].type);
+            setMeasure(articles[0].measure);
+            setPrice(articles[0].price);
         }
-
+        
         getArticles();
+        
     });
 
     const submitArticle = (e) => {
@@ -37,7 +45,7 @@ const AddArticles = () => {
             type: type,
             quantity: quantity,
             measure: measure,
-            total: total
+            price: price * quantity
         }
 
         setInvoiceArticles([...invoiceArticles, article]);
@@ -68,7 +76,7 @@ const AddArticles = () => {
         },
         {
           Header: 'Cijena',
-          accessor: 'total',
+          accessor: 'price',
         },
       ];
 
@@ -81,14 +89,17 @@ const AddArticles = () => {
                         <div className="form-item">
                             <label>Artikl</label>
                             <div className="half">
-                                <select name="articles" 
+                                <select name="articles"
                                     onChange={(e) => {
-                                        const article = articlesDb.find(art => art.name = e.target.value)
-                                        console.log(article);
-                                        console.log(articlesDb);
+                                        const article = articlesDb.find(art => art.id == e.target.value)
+                                        setId(article.id);
+                                        setName(article.name);
+                                        setType(article.type);
+                                        setMeasure(article.measure);
+                                        setPrice(article.price);
                                     }}>
                                     {articlesDb.map((article) => 
-                                        <option value={article.name}>{article.name}</option>
+                                        <option key={article.id} value={article.id}>{article.name}</option>
                                     )}
                                 </select>
                             </div>
@@ -110,6 +121,10 @@ const AddArticles = () => {
                 </div>    
             </form>   
             <DefaultTable path={path} appData={invoiceArticles} tableColumns={COLUMNS} />
+            <Link to="/add-invoice">
+                <Button>Natrag</Button>
+            </Link>
+
         </AddArticlesStyle>
     )
 }
