@@ -10,7 +10,9 @@ const { ipcRenderer } = window.require('electron');
 const { dialog } = window.require('electron').remote;
 
 const Invoice = (props) => {
-  const [invoice, setInvoice] = useState([]);
+  const [invoice, setInvoice] = useState('');
+  const [invoiceArticles, setInvoiceArticles] = useState([]);
+
   const [editInvoice, setEditInvoice] = useState(false);
   const history = useHistory();
 
@@ -19,7 +21,7 @@ const Invoice = (props) => {
   const [dlvNoteNumber, setDlvNoteNumber] = useState('');
   const [orderNumber, setOrderNumber] = useState('');
   const [invoiceState, setInvoiceState] = useState('');
-  const [articles, setArticles] = useState('');
+  // const [articles, setArticles] = useState('');
   const [invoiceType, setInvoiceType] = useState('');
   const [supplierCode, setSupplierCode] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
@@ -35,13 +37,24 @@ const Invoice = (props) => {
         : getInvoicePreview[0].invID;
       const currentInvoiceNumber = newLocal;
 
+      const invoiceArticle = await db.invoiceArticles
+        .where({
+          invoiceId: currentInvoiceNumber,
+        })
+        .toArray();
+
       const invoiceData = await db.invoices.get({
         invoiceNumber: currentInvoiceNumber,
       });
 
+      console.log(invoiceData);
+      console.log(invoiceArticle);
+
       await db.invoicePreview.clear();
       await db.invoicePreview.put({ invID: invoiceData.invoiceNumber });
 
+      // setInvoiceArticles([...invoiceArticle]);
+      setInvoiceArticles([...invoiceData.articles]);
       setInvoice(invoiceData);
     };
 
@@ -102,7 +115,7 @@ const Invoice = (props) => {
       deliveryDate: deliveryDate,
       supplierCode: supplierCode,
       invoiceType: invoiceType,
-      articles: articles,
+      // articles: articles,
       invoiceTotal: invoiceTotal,
       invoiceState: invoiceState,
       invoiceNote: invoiceNote,
@@ -162,8 +175,19 @@ const Invoice = (props) => {
 
           <div className="formColumn">
             <div className="formItem">
-              <p className="label">Odabir artikala</p>
-              <p className="content">{invoice.articles}</p>
+              <p className="label">Artikli</p>
+              {/* <p className="content">{invoice.articles}</p> */}
+              <ul>
+                {invoiceArticles.map((i) => (
+                  <li>
+                    <strong>{i.name}</strong>
+                    <p>{i.type}</p>
+                    <p>{i.fullPrice}</p>
+                  </li>
+                ))}
+              </ul>
+              {/* {invoice.articles[1].name} */}
+              {/* {invoiceArticles} */}
             </div>
 
             <div className="formItem">
@@ -257,8 +281,8 @@ const Invoice = (props) => {
 
           <div className="formColumn">
             <div className="formItem">
-              <label htmlFor="articles">Odabir artikala</label>
-              <input
+              {/* <label htmlFor="articles">Artikli</label> */}
+              {/* <input
                 type="text"
                 id="articles"
                 placeholder={invoice.articles}
@@ -268,9 +292,7 @@ const Invoice = (props) => {
                   setInvoiceTotal('125,00kn');
                 }}
                 value={articles}
-              />
-
-              {/* omogućiti izbor više artikala + količina za svakog */}
+              /> */}
             </div>
             <div className="formItem radioGroupWrapper">
               <label htmlFor="invoiceType">Vrsta računa</label>
@@ -374,7 +396,7 @@ const Invoice = (props) => {
                   setInvoiceState('');
                   setDlvNoteNumber('');
                   setOrderNumber('');
-                  setArticles('');
+                  // setArticles('');
                   setInvoiceType('');
                   setSupplierCode('');
                   setDeliveryDate('');
@@ -410,7 +432,7 @@ const Invoice = (props) => {
             setInvoiceState(invoice.invoiceState);
             setDlvNoteNumber(invoice.dlvNoteNumber);
             setOrderNumber(invoice.orderNumber);
-            setArticles(invoice.articles);
+            // setArticles(invoice.articles);
             setInvoiceType(invoice.invoiceType);
             setSupplierCode(invoice.supplierCode);
             setDeliveryDate(invoice.deliveryDate);

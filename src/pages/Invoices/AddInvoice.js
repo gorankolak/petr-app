@@ -46,12 +46,22 @@ const AddInvoice = () => {
 
   useEffect(() => {
     checkEnable();
-  }, [supplierCode, invoiceNumber, dlvNoteNumber, orderNumber, invoiceDate, deliveryDate, partner, invoiceState, invoiceType]);
+  }, [
+    supplierCode,
+    invoiceNumber,
+    dlvNoteNumber,
+    orderNumber,
+    invoiceDate,
+    deliveryDate,
+    partner,
+    invoiceState,
+    invoiceType,
+  ]);
 
   const checkEnable = () => {
     const addArticleButton = document.getElementById('addArticleButton');
     if (
-      (partner !== '' ) &&
+      partner !== '' &&
       invoiceNumber !== '' &&
       invoiceDate !== '' &&
       dlvNoteNumber !== '' &&
@@ -62,12 +72,12 @@ const AddInvoice = () => {
       invoiceState !== ''
       // invoiceNote !== ''
       // (partner !== '' || history.location.state !== undefined)
-    ){
-      addArticleButton.disabled = false;
+    ) {
+      // addArticleButton.disabled = false;
     } else {
-      addArticleButton.disabled = true;
+      // addArticleButton.disabled = true;
     }
-  }
+  };
 
   const clearFields = () => {
     setPartner('');
@@ -80,59 +90,44 @@ const AddInvoice = () => {
     setDeliveryDate('');
     setInvoiceNote('');
     setInvoiceType('');
-  }
-/*
-  const submitInvoice = async (e) => {
-    e.preventDefault();
-    console.log('submit invoice');
-    if (
-      (partner !== '' || history.location.state !== undefined) &&
-      invoiceNumber !== '' &&
-      invoiceDate !== '' &&
-      dlvNoteNumber !== '' &&
-      orderNumber !== '' &&
-      deliveryDate !== '' &&
-      supplierCode !== '' &&
-      invoiceType !== '' &&
-      invoiceState !== '' &&
-      articles !== ''
-      // invoiceNote !== ''
-      // (partner !== '' || history.location.state !== undefined)
-    ) {
-      newInvoice = {
-        invoiceNumber: invoiceNumber,
-        partner:
-          history.location.state !== undefined
-            ? history.location.state.name
-            : partner,
-        invoiceDate: invoiceDate,
-        dlvNoteNumber: dlvNoteNumber,
-        orderNumber: orderNumber,
-        deliveryDate: deliveryDate,
-        supplierCode: supplierCode,
-        invoiceType: invoiceType,
-        articles: articles,
-        invoiceTotal: invoiceTotal,
-        invoiceState: invoiceState,
-        invoiceNote: invoiceNote,
-      };
-
-      db.invoices.add(newInvoice);
-      dialog.showMessageBox({ message: 'Račun uspješno dodan' });
-
-      history.push({
-        pathname: '/invoice',
-        state: {
-          row: {
-            values: newInvoice,
-          },
-        },
-      });
-    } else {
-      dialog.showMessageBox({ message: 'Račun nije u potpunosti ispunjen' });
-    }
   };
-*/
+
+  const goStepTwo = () => {
+    // e.preventDefault();
+    console.log('submit invoice');
+
+    newInvoice = {
+      invoiceNumber: invoiceNumber,
+      partner:
+        history.location.state !== undefined
+          ? history.location.state.name
+          : partner,
+      invoiceDate: invoiceDate,
+      dlvNoteNumber: dlvNoteNumber,
+      orderNumber: orderNumber,
+      deliveryDate: deliveryDate,
+      supplierCode: supplierCode,
+      invoiceType: invoiceType,
+      articles: articles,
+      invoiceTotal: invoiceTotal,
+      invoiceState: invoiceState,
+      invoiceNote: invoiceNote,
+    };
+
+    // db.invoices.add(newInvoice);
+    // dialog.showMessageBox({ message: 'Račun uspješno dodan' });
+
+    history.push({
+      // pathname: '/invoice',
+      pathname: '/add-invoice-articles',
+      state: {
+        row: {
+          values: newInvoice,
+        },
+      },
+    });
+  };
+
   return (
     <AddInvoiceStyle>
       <h2>Novi račun</h2>
@@ -276,11 +271,10 @@ const AddInvoice = () => {
                   type="radio"
                   name="type"
                   id="invoiceType"
-                  onChange={(e) =>{
-                      setInvoiceType('Obavijest o knjiženju na teret');
-                      checkEnable();
-                    }
-                  }
+                  onChange={(e) => {
+                    setInvoiceType('Obavijest o knjiženju na teret');
+                    checkEnable();
+                  }}
                 />
                 <label htmlFor="invoiceType">
                   Obavijest o knjiženju na teret
@@ -291,11 +285,10 @@ const AddInvoice = () => {
                   type="radio"
                   name="type"
                   id="invoiceType"
-                  onChange={(e) =>{
-                      setInvoiceType('Obavijest o knjiženju u korist')
-                      checkEnable();
-                  }
-                  }
+                  onChange={(e) => {
+                    setInvoiceType('Obavijest o knjiženju u korist');
+                    checkEnable();
+                  }}
                 />
                 <label htmlFor="invoiceType">
                   Obavijest o knjiženju u korist
@@ -406,10 +399,22 @@ const AddInvoice = () => {
           </div>
         </div>
 
-        <div className="formItemAdd">
+        {/* <div className="formItemAdd">
           <Link to="/add-invoice-articles">
-            <Button id="addArticleButton" disabled={true}>Dodaj artikle</Button>
+            <Button id="addArticleButton" disabled={true}>
+              Dodaj artikle
+            </Button>
           </Link>
+        </div> */}
+
+        <div className="formItemAdd">
+          <Button
+            onClick={() => {
+              goStepTwo();
+            }}
+          >
+            Dodaj artikle
+          </Button>
         </div>
       </form>
 

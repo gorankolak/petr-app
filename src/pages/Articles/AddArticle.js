@@ -21,10 +21,20 @@ const AddArticle = () => {
 
   const submitArticle = (e) => {
     e.preventDefault();
-    // TO DO: Prilikom uređenja forme, treba razbiti if u manje dijelove. One informacije koje su neispravne moraju dati neku vrstu warninga u odgovarajućem polje 
-    if (name !== '' && type !== '' && measure !== ''
-          && tax !== '' && rebateBase !== '' && rebateAdded !== '' && price !== '' 
-          && tax >= 0 && rebateBase >= 0 && rebateAdded >= 0 && price >= 0) {
+    // TO DO: Prilikom uređenja forme, treba razbiti if u manje dijelove. One informacije koje su neispravne moraju dati neku vrstu warninga u odgovarajućem polje
+    if (
+      name !== '' &&
+      type !== '' &&
+      measure !== '' &&
+      tax !== '' &&
+      rebateBase !== '' &&
+      rebateAdded !== '' &&
+      price !== '' &&
+      tax >= 0 &&
+      rebateBase >= 0 &&
+      rebateAdded >= 0 &&
+      price >= 0
+    ) {
       newArticle = {
         name,
         type,
@@ -32,9 +42,11 @@ const AddArticle = () => {
         tax,
         rebateBase,
         rebateAdded,
-        price
+        price,
       };
 
+      console.log(price);
+      console.log(typeof price);
       dialog.showMessageBox({ message: 'Artikl uspješno dodan' });
 
       history.push({
@@ -116,7 +128,7 @@ const AddArticle = () => {
             <input
               type="number"
               id="type"
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(parseInt(e.target.value))}
             />
           </div>
 

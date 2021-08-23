@@ -223,18 +223,20 @@ const InvoicePreviewStyle = styled.div`
 `;
 
 const InvoicePreview = (props) => {
-  const [invoices, setInvoices] = useState([]);
+  const [invoices, setInvoices] = useState('');
+  const [invoiceArticles, setInvoiceArticles] = useState([]);
 
   useEffect(() => {
     const getInvoices = async () => {
-      const invoices = await db.invoices.toArray();
+      // const invoices = await db.invoices.toArray();
       const invoicePreview = await db.invoicePreview.toArray();
 
       const oneInvoice = await db.invoices.get({
         invoiceNumber: invoicePreview[0].invID,
       });
-
+      console.log(oneInvoice.articles[0].name);
       setInvoices(oneInvoice);
+      setInvoiceArticles([...oneInvoice.articles]);
     };
 
     getInvoices();
@@ -303,47 +305,25 @@ const InvoicePreview = (props) => {
             <th>Ukupna cijena</th>
           </thead>
           <tbody>
-            <tr>
-              <td>X</td>
-              <td>{invoices.supplierCode}</td>
-              <td>konzum jaja L/30 kom.</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>3500kn*</td>
-            </tr>
-            <tr>
-              <td>X</td>
-              <td>{invoices.supplierCode}</td>
-              <td>konzum jaja L/30 kom.</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>3500kn*</td>
-            </tr>
-            <tr>
-              <td>X</td>
-              <td>{invoices.supplierCode}</td>
-              <td>konzum jaja L/30 kom.</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>X</td>
-              <td>3500kn*</td>
-            </tr>
+            {invoiceArticles.map((article) => (
+              <tr>
+                <td>X</td>
+                <td>{invoices.supplierCode}</td>
+                <td>{article.name}</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>{article.fullPrice} kn</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <div className="table-final">
           <span className="total-label">UKUPNO:</span>
-          <span className="total-price">{invoices.invoiceTotal}</span>
+          <span className="total-price">{invoices.invoiceTotal} kn</span>
         </div>
       </div>
 
