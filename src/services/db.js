@@ -8,7 +8,8 @@ db.version(2).stores({
     '++id, partner, invoiceNumber, invoiceDate, dlvNoteNumber, orderNumber, deliveryDate, supplierCode, invoiceType, invoiceState, articles, invoiceNote, invoiceTotal',
   invoiceArticles:
     '++id, invoiceId, name, type, price, quantity, measure, fullPrice',
-  articles: '++id, name, type, measure, tax, rebateBase, rebateAdded, price',
+  articles:
+    '++id, name, measure, priceWithoutTax, tax, priceWithTax, mainCategory, subCategory',
   dlvNotes: '++id, dlvNoteNumber, dlvNoteDate',
   invoicePreview: 'invID',
 });

@@ -26,6 +26,7 @@ const AddInvoice = () => {
   const [invoiceNote, setInvoiceNote] = useState('');
   const [invoiceTotal, setInvoiceTotal] = useState('');
   let newInvoice;
+  let buttonEnabled = false;
 
   useEffect(() => {
     const getPartners = async () => {
@@ -60,24 +61,46 @@ const AddInvoice = () => {
 
   const checkEnable = () => {
     const addArticleButton = document.getElementById('addArticleButton');
-    if (
-      partner !== '' &&
-      invoiceNumber !== '' &&
-      invoiceDate !== '' &&
-      dlvNoteNumber !== '' &&
-      orderNumber !== '' &&
-      deliveryDate !== '' &&
-      supplierCode !== '' &&
-      invoiceType !== '' &&
-      invoiceState !== ''
-      // invoiceNote !== ''
-      // (partner !== '' || history.location.state !== undefined)
-    ) {
-      // addArticleButton.disabled = false;
-    } else {
-      // addArticleButton.disabled = true;
-    }
+    // if (
+    //   partner !== '' &&
+    //   invoiceNumber !== '' &&
+    //   invoiceDate !== '' &&
+    //   dlvNoteNumber !== '' &&
+    //   orderNumber !== '' &&
+    //   deliveryDate !== '' &&
+    //   supplierCode !== '' &&
+    //   invoiceType !== '' &&
+    //   invoiceState !== ''
+    //   // invoiceNote !== ''
+    //   // (partner !== '' || history.location.state !== undefined)
+    // ) {
+    //   // addArticleButton.disabled = false;
+    //   buttonEnabled = true;
+    // } else {
+    //   // addArticleButton.disabled = true;
+    //   buttonEnabled = false;
+    // }
   };
+
+  if (
+    partner !== '' &&
+    invoiceNumber !== '' &&
+    invoiceDate !== '' &&
+    dlvNoteNumber !== '' &&
+    orderNumber !== '' &&
+    deliveryDate !== '' &&
+    supplierCode !== '' &&
+    invoiceType !== '' &&
+    invoiceState !== ''
+    // invoiceNote !== ''
+    // (partner !== '' || history.location.state !== undefined)
+  ) {
+    // addArticleButton.disabled = false;
+    buttonEnabled = true;
+  } else {
+    // addArticleButton.disabled = true;
+    buttonEnabled = true;
+  }
 
   const clearFields = () => {
     setPartner('');
@@ -91,6 +114,26 @@ const AddInvoice = () => {
     setInvoiceNote('');
     setInvoiceType('');
   };
+
+  let addArticlesBtnDisplay;
+
+  if (buttonEnabled) {
+    addArticlesBtnDisplay = (
+      <Button
+        onClick={() => {
+          goStepTwo();
+        }}
+      >
+        Dodaj artikle
+      </Button>
+    );
+  } else {
+    addArticlesBtnDisplay = (
+      <Button className="disabledBtn" type="button">
+        Dodaj artikle
+      </Button>
+    );
+  }
 
   const goStepTwo = () => {
     // e.preventDefault();
@@ -376,10 +419,6 @@ const AddInvoice = () => {
               <span>{supplierCode}</span>
             </p>
             <p>
-              <span>Artikli:</span>
-              <span>{articles}</span>
-            </p>
-            <p>
               <span>Vrsta računa:</span>
               <span>{invoiceType}</span>
             </p>
@@ -392,9 +431,9 @@ const AddInvoice = () => {
               <span>{deliveryDate}</span>
             </p>
             <p>
-              <span>Ukupan iznos:</span>
+              {/* <span>Ukupan iznos:</span> */}
               {/* <span>{price}</span> */}
-              <span>{invoiceTotal}</span>
+              {/* <span>{invoiceTotal}</span> */}
             </p>
           </div>
         </div>
@@ -407,15 +446,7 @@ const AddInvoice = () => {
           </Link>
         </div> */}
 
-        <div className="formItemAdd">
-          <Button
-            onClick={() => {
-              goStepTwo();
-            }}
-          >
-            Dodaj artikle
-          </Button>
-        </div>
+        <div className="formItemAdd">{addArticlesBtnDisplay}</div>
       </form>
 
       <MainFooter>

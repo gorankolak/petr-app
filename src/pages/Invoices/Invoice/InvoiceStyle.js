@@ -7,10 +7,20 @@ const InvoiceStyle = styled.div`
   }
 
   .formWrapper {
-    width: 75%;
+    /* width: 75%; */
+    max-height: 460px;
+    /* margin-bottom: 20px; */
+    overflow: auto;
+    /* outline: 2px solid ${(props) => props.theme.color.black}; */
 
     &.editInvoice {
       width: 100%;
+    }
+
+    .formItem {
+      ul li {
+        list-style: none;
+      }
     }
   }
 `;

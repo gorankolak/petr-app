@@ -294,29 +294,21 @@ const InvoicePreview = (props) => {
         <table>
           <thead>
             <th>Rb.</th>
-            <th>EAN KOD</th>
             <th>Naziv artikla</th>
             <th>Kol.</th>
             <th>Cijena</th>
-            <th>Rabat</th>
-            <th>Jed. cijena</th>
-            <th>Cijena bez poreza</th>
             <th>PDV</th>
             <th>Ukupna cijena</th>
           </thead>
           <tbody>
-            {invoiceArticles.map((article) => (
+            {invoiceArticles.map((article, index) => (
               <tr>
-                <td>X</td>
-                <td>{invoices.supplierCode}</td>
+                <td>{index + 1}</td>
                 <td>{article.name}</td>
-                <td>X</td>
-                <td>X</td>
-                <td>X</td>
-                <td>X</td>
-                <td>X</td>
-                <td>X</td>
-                <td>{article.fullPrice} kn</td>
+                <td>{article.quantity}</td>
+                <td>{article.price}</td>
+                <td>25%</td>
+                <td>{Number(article.fullPrice).toFixed(2)} kn</td>
               </tr>
             ))}
           </tbody>

@@ -26,28 +26,24 @@ const Articles = () => {
       accessor: 'name',
     },
     {
-      Header: 'Vrsta artikla',
-      accessor: 'type',
+      Header: 'Glavna kategorija',
+      accessor: 'mainCategory',
     },
     {
-      Header: 'Jed. mjere',
-      accessor: 'measure',
+      Header: 'Podkategorija',
+      accessor: 'subCategory',
     },
     {
-      Header: 'PDV',
+      Header: 'Cijena bez PDV-a',
+      accessor: 'priceWithoutTax',
+    },
+    {
+      Header: 'PDV %',
       accessor: 'tax',
     },
     {
-      Header: 'Rabat osn.',
-      accessor: 'rebateBase',
-    },
-    {
-      Header: 'Rabat dodani',
-      accessor: 'rebateAdded',
-    },
-    {
-      Header: 'Cijena',
-      accessor: 'price',
+      Header: 'Cijena s PDV-om',
+      accessor: 'priceWithTax',
     },
   ];
 

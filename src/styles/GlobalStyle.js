@@ -80,12 +80,17 @@ const GlobalStyle = createGlobalStyle`
           }
         }
       } */
+    }
 
-      &.accent {
+    .accent {
         padding: 1rem;
         background-color: ${(props) => props.theme.color.dust};
         box-shadow: 0 20px 30px 0 rgb(12 0 46 / 5%);
         border-radius: 20px;
+
+        &.large {
+          padding: 2rem;
+        }
 
         p {
           margin-bottom: 5px;
@@ -105,7 +110,6 @@ const GlobalStyle = createGlobalStyle`
           }
         }
       }
-    }
 
     .formItem {
       display: flex;

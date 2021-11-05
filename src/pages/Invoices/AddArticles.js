@@ -14,55 +14,113 @@ const AddArticles = (props) => {
   const [newInvoice, setNewInvoice] = useState('');
   const [articlesDb, setArticlesDb] = useState([]);
   const [invoiceArticles, setInvoiceArticles] = useState([]);
-  // const [id, setId] = useState('');
   const [invoiceId, setInvoiceId] = useState('');
   const [name, setName] = useState('');
-  const [type, setType] = useState('');
+  // const [type, setType] = useState('');
   const [quantity, setQuantity] = useState('');
   const [measure, setMeasure] = useState('kom');
-  const [price, setPrice] = useState(0);
+  // const [price, setPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [returnFlag, setReturnFlag] = useState(false);
+
+  const [tax, setTax] = useState('');
+  const [priceWithTax, setPriceWithTax] = useState('');
+  const [priceWithoutTax, setPriceWithoutTax] = useState('');
+  const [mainCategory, setMainCategory] = useState('');
+  const [subCategory, setSubCategory] = useState('');
+  const [rebateBase, setRebateBase] = useState('');
+  const [rebateAdded, setRebateAdded] = useState('');
 
   useEffect(() => {
     const newInvoiceData = props.location.state.row.values;
     const getArticles = async () => {
       const articles = await db.articles.toArray();
       setArticlesDb(articles);
-      // setId(articles[0].id);
       setInvoiceId(newInvoiceData.invoiceNumber);
       setName(articles[0].name);
-      setType(articles[0].type);
+      // setType(articles[0].type);
       setMeasure(articles[0].measure);
-      setPrice(articles[0].price);
+      // setPrice(articles[0].price);
+
+      setTax(articles[0].tax);
+      setMainCategory(articles[0].mainCategory);
+      setSubCategory(articles[0].subCategory);
+      setPriceWithoutTax(articles[0].priceWithoutTax);
+      setPriceWithTax(articles[0].priceWithTax);
+      // setRebateBase(articles[0].rebateBase);
+      // setRebateAdded(articles[0].rebateAdded);
     };
 
     setNewInvoice(newInvoiceData);
-    console.log(newInvoiceData);
-    console.log(newInvoice);
-
     getArticles();
   }, []);
 
   const submitArticle = (e) => {
     e.preventDefault();
 
+    const calcFullPrice = () => {
+      const basePrice = parseInt(priceWithTax) * parseInt(quantity);
+      const rebBase = parseInt(rebateBase);
+      const rebAdded = parseInt(rebateAdded);
+
+      if (
+        rebateBase != '' &&
+        rebateBase > 0 &&
+        (rebateAdded == '' || rebateAdded == 0)
+      ) {
+        return basePrice + (basePrice - basePrice * (1 + rebBase / 100));
+      } else if (
+        rebAdded != '' &&
+        rebAdded > 0 &&
+        (rebBase == '' || rebBase == 0)
+      ) {
+        return basePrice + (basePrice - basePrice * (1 + rebAdded / 100));
+      } else if (
+        rebAdded != '' &&
+        rebAdded > 0 &&
+        rebBase != '' &&
+        rebBase > 0
+      ) {
+        return (
+          basePrice +
+          (basePrice - basePrice * (1 + rebBase / 100)) +
+          (basePrice - basePrice * (1 + rebAdded / 100))
+        );
+      } else {
+        return priceWithTax * quantity;
+      }
+    };
+
     const article = {
-      // id: id,
       invoiceId: invoiceId,
       name: name,
-      type: type,
-      price: price,
+      // type: type,
+      // price: price,
+      tax,
+      mainCategory,
+      subCategory,
+      priceWithoutTax,
+      priceWithTax: parseInt(priceWithTax) + parseInt(rebateBase),
+      rebateBase,
+      rebateAdded,
       quantity: parseInt(quantity),
       measure: measure,
-      fullPrice: price * quantity,
+      fullPrice: calcFullPrice().toFixed(2),
     };
-    console.log(...invoiceArticles);
-    console.log(invoiceArticles);
-    console.log(article.price);
-    setInvoiceArticles([...invoiceArticles, article]);
 
-    setTotalPrice(article.fullPrice + totalPrice);
+    setInvoiceArticles([...invoiceArticles, article]);
+    setTotalPrice(parseInt(article.fullPrice) + totalPrice);
+  };
+
+  const removeArticles = (id) => {
+    // const article = '';
+
+    // setInvoiceArticles([article]);
+
+    const newArticle = invoiceArticles.filter((art) => art.id !== id);
+
+    setInvoiceArticles(newArticle);
+    setTotalPrice(0);
   };
 
   const createInvoice = () => {
@@ -71,10 +129,8 @@ const AddArticles = (props) => {
     newInvoice.invoiceTotal = totalPrice;
 
     db.invoices.add(newInvoice);
-
     newInvoiceArticles.map((ar) => db.invoiceArticles.add(ar));
 
-    // db.invoiceArticles.add(newInvoiceArticles);
     dialog.showMessageBox({ message: 'Račun uspješno dodan' });
 
     history.push({
@@ -90,32 +146,32 @@ const AddArticles = (props) => {
   const path = 'add-invoice-articles';
 
   const COLUMNS = [
-    // {
-    //   Header: 'Br.',
-    //   accessor: 'id',
-    // },
     {
       Header: 'Naziv',
       accessor: 'name',
     },
     {
-      Header: 'Vrsta',
-      accessor: 'type',
+      Header: 'Cijena bez PDV-a',
+      accessor: 'priceWithoutTax',
     },
     {
-      Header: 'Cijena artikla',
-      accessor: 'price',
+      Header: 'Rabat osnovni %',
+      accessor: 'rebateBase',
+    },
+    {
+      Header: 'Rabat dodatni %',
+      accessor: 'rebateAdded',
+    },
+    {
+      Header: 'PDV %',
+      accessor: 'tax',
     },
     {
       Header: 'Količina',
       accessor: 'quantity',
     },
     {
-      Header: 'Mjerna jedinica',
-      accessor: 'measure',
-    },
-    {
-      Header: 'Ukupno',
+      Header: 'Ukupna cijena',
       accessor: 'fullPrice',
     },
   ];
@@ -124,46 +180,71 @@ const AddArticles = (props) => {
     <AddArticlesStyle>
       <form onSubmit={submitArticle}>
         <h2>Dodaj artikle</h2>
-        <div className="form-wrapper">
-          <div className="form-column">
-            <div className="form-item">
+        <div className="formWrapper addArticles">
+          <div className="formColumn">
+            <div className="formItem">
               <label>Artikl</label>
-              <div className="half">
-                <select
-                  name="articles"
-                  onChange={(e) => {
-                    const article = articlesDb.find(
-                      (art) => art.id == e.target.value
-                    );
-                    // setId(article.id);
-                    setName(article.name);
-                    setType(article.type);
-                    setMeasure(article.measure);
-                    setPrice(article.price);
-                  }}
-                >
-                  {articlesDb.map((article) => (
-                    <option key={article.id} value={article.id}>
-                      {article.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <select
+                name="articles"
+                onChange={(e) => {
+                  const article = articlesDb.find(
+                    (art) => art.id == e.target.value
+                  );
+                  setName(article.name);
+                  // setType(article.type);
+                  setMeasure(article.measure);
+                  // setPrice(article.price);
+                  setMainCategory(article.mainCategory);
+                  setSubCategory(article.subCategory);
+                  setPriceWithoutTax(article.priceWithoutTax);
+                  setPriceWithTax(article.priceWithTax);
+                  // setRebateBase(article.rebateBase);
+                  // setRebateAdded(article.rebateAdded);
+                }}
+              >
+                {articlesDb.map((article) => (
+                  <option key={article.id} value={article.id}>
+                    {article.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
-          <div className="form-column">
-            <div className="form-item">
+
+          <div className="formColumn">
+            <div className="formItem">
               <label>Količina</label>
-              <div className="half">
-                <input
-                  type="number"
-                  onChange={(e) => setQuantity(e.target.value)}
-                ></input>
-              </div>
+              <input
+                type="number"
+                onChange={(e) => setQuantity(e.target.value)}
+              ></input>
             </div>
           </div>
-          <div className="form-column">
-            <div className="form-item">
+
+          <div className="formColumn">
+            <div className="formItem">
+              <label>Rabat osnovni %</label>
+              <input
+                type="number"
+                onChange={(e) =>
+                  setRebateBase(Number(e.target.value).toFixed(2))
+                }
+              ></input>
+            </div>
+          </div>
+
+          <div className="formColumn">
+            <div className="formItem">
+              <label>Rabat dodatni %</label>
+              <input
+                type="number"
+                onChange={(e) =>
+                  setRebateAdded(Number(e.target.value).toFixed(2))
+                }
+              ></input>
+            </div>
+
+            <div className="formItem">
               <Button type="submit">Dodaj artikl</Button>
             </div>
           </div>
@@ -180,10 +261,16 @@ const AddArticles = (props) => {
       <Link to="/add-invoice">
         <Button>Natrag</Button>
       </Link>
+      <Button
+        onClick={() => {
+          removeArticles();
+        }}
+      >
+        Ukloni artikle
+      </Button>
       <div className="formItemAdd">
         <Button
           onClick={() => {
-            // continue here: add invoice to db + go to new invoice display
             createInvoice();
           }}
         >

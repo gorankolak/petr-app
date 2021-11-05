@@ -17,9 +17,13 @@ const Article = (props) => {
   const [type, setType] = useState('');
   const [measure, setMeasure] = useState('');
   const [tax, setTax] = useState('');
-  const [rebateBase, setRebateBase] = useState('');
-  const [rebateAdded, setRebateAdded] = useState('');
-  const [price, setPrice] = useState('');
+  // const [rebateBase, setRebateBase] = useState('');
+  // const [rebateAdded, setRebateAdded] = useState('');
+  const [priceWithTax, setPriceWithTax] = useState('');
+  const [priceWithoutTax, setPriceWithoutTax] = useState('');
+  const [mainCategory, setMainCategory] = useState('');
+  const [subCategory, setSubCategory] = useState('');
+  // const [price, setPrice] = useState('');
 
   useEffect(() => {
     const getArticles = async () => {
@@ -60,17 +64,37 @@ const Article = (props) => {
   const changeArticle = async (e) => {
     e.preventDefault();
     // TO DO: Provjeriti dodatna ograničenja koja trebaju biti stavljena na pojedina polja
-    if (name !== '' && type !== '' && measure !== ''
-          && tax !== '' && rebateBase !== '' && rebateAdded !== '' && price !== '' 
-          && tax >= 0 && rebateBase >= 0 && rebateAdded >= 0 && price >= 0) {
+    if (
+      name !== '' &&
+      // type !== '' &&
+      measure !== '' &&
+      tax !== '' &&
+      // rebateBase !== '' &&
+      // rebateAdded !== '' &&
+      // price !== '' &&
+      priceWithTax !== '' &&
+      priceWithoutTax !== '' &&
+      mainCategory !== '' &&
+      subCategory !== '' &&
+      tax >= 0 &&
+      // rebateBase >= 0 &&
+      // rebateAdded >= 0 &&
+      // price >= 0
+      priceWithTax >= 0 &&
+      priceWithoutTax >= 0
+    ) {
       const newArticle = {
         name,
-        type,
+        // type,
         measure,
         tax,
-        rebateBase,
-        rebateAdded,
-        price
+        // rebateBase,
+        // rebateAdded,
+        // price,
+        priceWithTax,
+        priceWithoutTax,
+        mainCategory,
+        subCategory,
       };
 
       await db.articles.update(article.id, newArticle);
@@ -81,12 +105,16 @@ const Article = (props) => {
 
       setArticle(updatedArticle);
       setName('');
-      setType('');
+      // setType('');
       setMeasure('');
       setTax('');
-      setRebateBase('');
-      setRebateAdded('');
-      setPrice('');
+      // setRebateBase('');
+      // setRebateAdded('');
+      // setPrice('');
+      setPriceWithTax('');
+      setPriceWithoutTax('');
+      setMainCategory('');
+      setSubCategory('');
       setEditArticle(false);
     } else {
       dialog.showMessageBox({ message: 'Podaci o artiklu su nepotpuni' });
@@ -107,33 +135,38 @@ const Article = (props) => {
             </div>
 
             <div className="formItem">
-              <p className="label">Vrsta artikla</p>
-              <p className="content">{article.type}</p>
+              <p className="label">Glavna kategorija</p>
+              <p className="content">{article.mainCategory}</p>
+            </div>
+
+            <div className="formItem">
+              <p className="label">Podkategorija</p>
+              <p className="content">{article.subCategory}</p>
             </div>
 
             <div className="formItem">
               <p className="label">Jedinica mjere</p>
               <p className="content">{article.measure}</p>
             </div>
+          </div>
+          <div className="formColumn">
+            <div className="formItem">
+              <p className="label">Cijena bez PDV-a</p>
+              <p className="content">
+                {Number(article.priceWithoutTax).toFixed(2)} kn
+              </p>
+            </div>
 
             <div className="formItem">
               <p className="label">PDV</p>
-              <p className="content">{article.tax}</p>
+              <p className="content">{article.tax} %</p>
             </div>
 
             <div className="formItem">
-              <p className="label">Rabat osnovni</p>
-              <p className="content">{article.rebateBase}</p>
-            </div>
-
-            <div className="formItem">
-              <p className="label">Rabat dodani</p>
-              <p className="content">{article.rebateAdded}</p>
-            </div>
-
-            <div className="formItem">
-              <p className="label">Cijena</p>
-              <p className="content">{article.price}</p>
+              <p className="label">Cijena s PDV-om</p>
+              <p className="content">
+                {Number(article.priceWithTax).toFixed(2)} kn
+              </p>
             </div>
           </div>
         </div>
@@ -157,13 +190,23 @@ const Article = (props) => {
               />
             </div>
             <div className="formItem">
-              Vrsta artikla{' '}
+              Glavna kategorija{' '}
               <input
                 type="text"
-                id="type"
+                id="mainCategory"
                 placeholder={article.type}
-                onChange={(e) => setType(e.target.value)}
-                value={type}
+                onChange={(e) => setMainCategory(e.target.value)}
+                value={mainCategory}
+              />
+            </div>
+            <div className="formItem">
+              Podkategorija{' '}
+              <input
+                type="text"
+                id="subCategory"
+                placeholder={article.type}
+                onChange={(e) => setSubCategory(e.target.value)}
+                value={subCategory}
               />
             </div>
             <div className="formItem">
@@ -174,6 +217,18 @@ const Article = (props) => {
                 placeholder={article.measure}
                 onChange={(e) => setMeasure(e.target.value)}
                 value={measure}
+              />
+            </div>
+          </div>
+          <div className="formColumn">
+            <div className="formItem">
+              Cijena bez PDV-a{' '}
+              <input
+                type="number"
+                id="priceWithoutTax"
+                placeholder={article.rebateBase}
+                onChange={(e) => setPriceWithoutTax(e.target.value)}
+                value={priceWithoutTax}
               />
             </div>
             <div className="formItem">
@@ -187,46 +242,50 @@ const Article = (props) => {
               />
             </div>
             <div className="formItem">
-              Rabat osnovni{' '}
+              Cijena s PDV-om{' '}
               <input
                 type="number"
-                id="rebateBase"
+                id="priceWithTax"
                 placeholder={article.rebateBase}
-                onChange={(e) => setRebateBase(e.target.value)}
-                value={rebateBase}
+                onChange={(e) => setPriceWithTax(e.target.value)}
+                value={priceWithTax}
               />
             </div>
+
             <div className="formItem">
-              Rabat dodani{' '}
-              <input
-                type="text"
-                id="rebateAdded"
-                placeholder={article.rebateAdded}
-                onChange={(e) => setRebateAdded(e.target.value)}
-                value={rebateAdded}
-              />
+              Cijena s PDV-om{' '}
+              <div className="half">
+                <input
+                  type="number"
+                  id="priceWithTax"
+                  value={priceWithTax}
+                  readOnly
+                />
+                <Button
+                  tableBtn
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPriceWithTax(
+                      Number(priceWithoutTax * (1 + tax / 100)).toFixed(2)
+                    );
+                  }}
+                >
+                  Izračunaj
+                </Button>
+              </div>
             </div>
-            <div className="formItem">
-              Cijena{' '}
-              <input
-                type="text"
-                id="price"
-                placeholder={article.price}
-                onChange={(e) => setPrice(e.target.value)}
-                value={price}
-              />
-            </div>
+
             <div>
               <Button
                 onClick={() => {
                   setEditArticle(false);
                   setName('');
-                  setType('');
+                  setMainCategory('');
+                  setSubCategory('');
                   setMeasure('');
                   setTax('');
-                  setRebateBase('');
-                  setRebateAdded('');
-                  setPrice('');
+                  setPriceWithoutTax('');
+                  setPriceWithTax('');
                 }}
               >
                 Otkaži izmjenu
@@ -253,12 +312,12 @@ const Article = (props) => {
           onClick={() => {
             setEditArticle(true);
             setName(article.name);
-            setType(article.type);
+            setMainCategory(article.mainCategory);
+            setSubCategory(article.subCategory);
             setMeasure(article.measure);
             setTax(article.tax);
-            setRebateBase(article.rebateBase);
-            setRebateAdded(article.rebateAdded);
-            setPrice(article.price);
+            setPriceWithoutTax(article.priceWithoutTax);
+            setPriceWithTax(article.priceWithTax);
           }}
         >
           Izmijeni artikl

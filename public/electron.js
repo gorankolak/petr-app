@@ -13,7 +13,7 @@ if (require('electron-squirrel-startup')) {
 function createWindow() {
   const win = new BrowserWindow({
     width: 1250,
-    height: 825,
+    height: 850,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,

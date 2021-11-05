@@ -17,7 +17,7 @@ const PartnerStyle = styled.div`
   }
 
   .partnerTable {
-    max-height: 235px;
+    max-height: 300px;
     overflow: auto;
   }
 `;

@@ -141,11 +141,15 @@ const Invoice = (props) => {
       <>
         <h2>Račun br. {invoice.invoiceNumber}</h2>
 
-        <div className="formWrapper">
+        <div className="formWrapper accent large">
           <div className="formColumn">
             {/* <div className="formItem">
 
             </div> */}
+            <div className="formItem">
+              <p className="label">Kupac</p>
+              <p className="content">{invoice.partner}</p>
+            </div>
 
             <div className="formItem">
               <p className="label">Datum izdavanja</p>
@@ -177,19 +181,20 @@ const Invoice = (props) => {
             <div className="formItem">
               <p className="label">Artikli</p>
               {/* <p className="content">{invoice.articles}</p> */}
-              <ul>
+              <ol>
                 {invoiceArticles.map((i) => (
                   <li>
                     <strong>{i.name}</strong>
-                    <p>{i.type}</p>
-                    <p>{i.fullPrice}</p>
+                    <div>{i.type}</div>
+                    <div>{i.fullPrice} kn</div>
                   </li>
                 ))}
-              </ul>
+              </ol>
               {/* {invoice.articles[1].name} */}
               {/* {invoiceArticles} */}
             </div>
-
+          </div>
+          <div className="formColumn">
             <div className="formItem">
               <p className="label">Vrsta računa</p>
               <p className="content">{invoice.invoiceType}</p>
@@ -212,7 +217,9 @@ const Invoice = (props) => {
 
             <div className="formItem">
               <p className="label">Iznos računa</p>
-              <p className="content">{invoice.deliveryDate}</p>
+              <p className="content">
+                {Number(invoice.invoiceTotal).toFixed(2)} kn
+              </p>
             </div>
           </div>
         </div>
@@ -385,7 +392,9 @@ const Invoice = (props) => {
               </div>
             </div>
 
-            <div className="formItem">Iznos računa: {invoice.invoiceTotal}</div>
+            <div className="formItem">
+              Iznos računa: {invoice.invoiceTotal} kn
+            </div>
 
             <div>
               <Button

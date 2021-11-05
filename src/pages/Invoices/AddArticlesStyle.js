@@ -9,6 +9,19 @@ const AddInvoiceStyle = styled.div`
     max-height: 280px;
     overflow: auto;
   }
+
+  .formWrapper.addArticles {
+    /* justify-content: left; */
+    justify-content: space-between;
+
+    button {
+      margin: 0;
+    }
+
+    .formColumn {
+      width: 185px;
+    }
+  }
   /* max-width: 300px;
 
   form {
